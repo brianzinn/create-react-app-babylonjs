@@ -33,7 +33,7 @@ class Layout extends Component {
     render() {
         return (
             <div>
-                <Navbar color="dark" className="navbar-dark" toggleable>
+                <Navbar color="dark" className="navbar-dark" expand>
                     <NavbarBrand href="/">react + BabylonJS</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>

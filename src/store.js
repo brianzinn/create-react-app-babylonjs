@@ -2,6 +2,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 
 import { createBrowserHistory } from 'history'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { babylonJSMiddleware } from 'react-babylonjs'
 
 import rootReducer from './rootReducer';
 
@@ -15,7 +16,8 @@ const store = createStore(
     compose(
       applyMiddleware(
         routerMiddleware(history), // for dispatching history actions
-        // ... other middlewares ...
+        babylonJSMiddleware
+        // other middleware ...
       ),
     ),
   )

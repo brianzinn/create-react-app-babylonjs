@@ -8,6 +8,7 @@
     "bootstrap": "4.1.1",
     "connected-react-router": "^4.3.0",
     "react": "^16.4.1",
+    "react-babylonjs": "^0.2.2",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
