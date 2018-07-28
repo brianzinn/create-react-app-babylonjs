@@ -44,8 +44,8 @@ class Layout extends Component {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink to={'/todo'} activeClassName="active" className="nav-link">
-                                    <span className="glyphicon glyphicon-play" /> Todo
+                                <NavLink to={'/sample'} activeClassName="active" className="nav-link">
+                                    <span className="glyphicon glyphicon-play" /> Sample1
                                 </NavLink>
                             </NavItem>
                         </Nav>

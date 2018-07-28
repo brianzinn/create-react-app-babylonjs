@@ -1004,9 +1004,9 @@ babylonjs-gui@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-3.2.0.tgz#e454b037c1586cf60bc5b8610410308675464bba"
 
-babylonjs@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-3.2.0.tgz#14cb71f27adaae1b071a03bd0d292b0fe07e448e"
+babylonjs@^3.3.0-alpha.13:
+  version "3.3.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-3.3.0-alpha.13.tgz#b4d95c74bda0c5cd2be833e25e28145b1358f68b"
 
 balanced-match@^0.4.2:
   version "0.4.2"

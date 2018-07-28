@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
 // import your Module reducers here and combine them
-import todo from './todo/reducers'
+import sample from './sample/reducers'
 
 const rootReducer = combineReducers({
-	todo
+	sample
 	// additional reducers go here.
 });
 
