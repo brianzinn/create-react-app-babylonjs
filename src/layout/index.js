@@ -44,8 +44,13 @@ class Layout extends Component {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink to={`${process.env.PUBLIC_URL}/sample`} activeClassName="active" className="nav-link">
-                                    <span className="glyphicon glyphicon-play" /> Sample1
+                                <NavLink to={`${process.env.PUBLIC_URL}/defaultPlayground`} activeClassName="active" className="nav-link">
+                                    <span className="glyphicon glyphicon-play" /> Default Playground
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink to={`${process.env.PUBLIC_URL}/withProps`} activeClassName="active" className="nav-link">
+                                    <span className="glyphicon glyphicon-play" /> With React Props
                                 </NavLink>
                             </NavItem>
                         </Nav>

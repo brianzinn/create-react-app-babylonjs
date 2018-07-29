@@ -5629,9 +5629,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-babylonjs@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.3.0.tgz#003d971469f644a08eb2d2f86b53fecd42186dc4"
+react-babylonjs@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.3.1.tgz#74f10924606674ff3cf67025676f7b15ec923b6e"
 
 react-dev-utils@^5.0.1:
   version "5.0.1"
@@ -5762,6 +5762,12 @@ react-scripts@1.1.4:
     whatwg-fetch "2.0.3"
   optionalDependencies:
     fsevents "^1.1.3"
+
+react-switch@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-switch/-/react-switch-3.0.4.tgz#52958b2736b4d21b4f0050997955c5365019ca7b"
+  dependencies:
+    prop-types "^15.6.1"
 
 react-transition-group@^2.3.1:
   version "2.4.0"
