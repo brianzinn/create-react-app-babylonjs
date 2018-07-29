@@ -39,12 +39,12 @@ class Layout extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink exact={true} to={'/'} activeClassName="active" className="nav-link">
+                                <NavLink exact={true} to={`${process.env.PUBLIC_URL}/`} activeClassName="active" className="nav-link">
                                     <span className="glyphicon glyphicon-home" /> Home
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink to={'/sample'} activeClassName="active" className="nav-link">
+                                <NavLink to={`${process.env.PUBLIC_URL}/sample`} activeClassName="active" className="nav-link">
                                     <span className="glyphicon glyphicon-play" /> Sample1
                                 </NavLink>
                             </NavItem>
