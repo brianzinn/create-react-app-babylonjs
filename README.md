@@ -26,7 +26,7 @@ npm install react-babylonjs
 
 A BabylonJS scene to your webpage in either a declarative manner or code manner (or combination).
 
-## Declarative only
+## 100% Declarative
 Can be done purely with React Components and zero code.
 ```jsx
 <Scene id="sample-canvas">
@@ -40,17 +40,36 @@ Can be done purely with React Components and zero code.
 </Scene>
 ```
 
-There is a live demo on GH pages:
-[live demo declarative syntax](https://brianzinn.github.io/create-react-app-babylonjs/sample)
-
+## 100% declarative - Loading 3D models with zero code (optional state/props flow).
+You can easily control BabylonJS models as well.  This sample loads 3D models and controls them with buttons.
+live demo: [with model](https://brianzinn.github.io/create-react-app-babylonjs/withModel)
+live demo: [with props](https://brianzinn.github.io/create-react-app-babylonjs/withProps)
+```xml
+class WithModel extends React.Component 
+{
+  ...
+  render() {
+    return (
+      <Scene id="sample-canvas">
+        <ArcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2} radius={0.075} target={Vector3.Zero()} minZ={0.001} />
+        <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
+        <Model
+          position={ new Vector3(0.02, 0, 0)}
+          rootUrl = {`${baseUrl}BoomBox/glTF/`}
+          sceneFilename="BoomBox.gltf"
+        />
+      </Scene>
+    )
+  }
+}
+```
 ## Code only
 ```jsx
 <Scene id="sample-canvas" onSceneMount={this.loadScene} />
 ```
 ## TODO: 
-1. Add full example for code only as well as a code/declarative combination.
-2. Add example with React props (state) propagating to BabylonJS meshes.
-3. Add Gizmo example with redo/undo - synced with React + BabylonJS.
+1. Add full example for code only as well as a code/declarative combination and new createCamera() usage example.
+2. Add Gizmo example with redo/undo - synced with React + BabylonJS.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 You can find out about bootstrapping and ejecting on that site.  This project has not been ejected.

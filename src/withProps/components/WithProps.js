@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Scene, FreeCamera, HemisphericLight, Sphere, Ground, Box, RotateMeshBehaviour } from 'react-babylonjs'
+import { Scene, FreeCamera, HemisphericLight, Box, RotateMeshBehaviour } from 'react-babylonjs'
 import { Vector3, Axis } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Switch from "react-switch";
@@ -65,7 +65,7 @@ class WithProps extends Component
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <Scene id="sample-canvas">
+            <Scene id="sample-canvas" touchActionNone={true}>
               <FreeCamera name="camera1" position={new Vector3(0, 5, -10)} target={Vector3.Zero()} />
               <HemisphericLight name="light1" intensity={this.state.intensity} direction={Vector3.Up()} />
               <Box name="box" size={4} position={new Vector3(0, 1, 0)}>

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Scene, FreeCamera, HemisphericLight, Sphere, Ground, Box, RotateMeshBehaviour } from 'react-babylonjs'
-import { Vector3, Axis } from 'babylonjs';
+import { Scene, FreeCamera, HemisphericLight, Sphere, Ground } from 'react-babylonjs'
+import { Vector3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 
 import './DefaultPlayground.css'

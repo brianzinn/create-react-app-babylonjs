@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@githubprimer/octicons-react@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@githubprimer/octicons-react/-/octicons-react-8.0.0.tgz#11c72f75d9d0124bc801db71b786055651a2a448"
+  dependencies:
+    prop-types "^15.6.1"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -1000,9 +1006,19 @@ babylon@^6.17.0, babylon@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
+babylonjs-gltf2interface@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-3.2.0.tgz#dd903ac947f79e7818006feec386a5b8bae981e3"
+
 babylonjs-gui@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-3.2.0.tgz#e454b037c1586cf60bc5b8610410308675464bba"
+
+babylonjs-loaders@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-3.2.0.tgz#a0984703cd5ca7ec0f29cc8796ecb29d9a65d82c"
+  dependencies:
+    babylonjs-gltf2interface "3.2.0"
 
 babylonjs@^3.3.0-alpha.13:
   version "3.3.0-alpha.13"
@@ -5629,9 +5645,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-babylonjs@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.3.1.tgz#74f10924606674ff3cf67025676f7b15ec923b6e"
+react-babylonjs@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.3.2.tgz#50256ebcb0b207d11b9a30ae39c5010bcdbbab84"
 
 react-dev-utils@^5.0.1:
   version "5.0.1"

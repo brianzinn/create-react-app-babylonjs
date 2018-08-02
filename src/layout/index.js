@@ -12,6 +12,8 @@ import {
     Col
 } from 'reactstrap';
 
+import Octicon, { Home, TriangleRight} from '@githubprimer/octicons-react'
+
 import {
     NavLink
 } from 'react-router-dom'
@@ -40,17 +42,22 @@ class Layout extends Component {
                         <Nav className="ml-auto" navbar>
                             <NavItem>
                                 <NavLink exact={true} to={`${process.env.PUBLIC_URL}/`} activeClassName="active" className="nav-link">
-                                    <span className="glyphicon glyphicon-home" /> Home
+                                    <Octicon icon={Home}/>Home
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/defaultPlayground`} activeClassName="active" className="nav-link">
-                                    <span className="glyphicon glyphicon-play" /> Default Playground
+                                    <Octicon icon={TriangleRight}/> Default Playground
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withProps`} activeClassName="active" className="nav-link">
-                                    <span className="glyphicon glyphicon-play" /> With React Props
+                                    <Octicon icon={TriangleRight}/> With React Props
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">
+                                    <Octicon icon={TriangleRight}/> With Model
                                 </NavLink>
                             </NavItem>
                         </Nav>
