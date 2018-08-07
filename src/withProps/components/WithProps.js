@@ -20,18 +20,18 @@ class WithProps extends Component
   }
 
   handleClockwiseChange(clockwiseChecked) {
-    this.setState({
-      ...this.state,
+    this.setState((state) => ({
+      ...state,
       clockwiseChecked
-    });
+    }));
   }
 
   handleDimmerChange(dimmerChecked) {
-    this.setState({
-      ...this.state,
+    this.setState((state) => ({
+      ...state,
       dimmerChecked,
       intensity: (dimmerChecked ? 0.7 : 0.2)
-    });
+    }));
   }
 
   render() {

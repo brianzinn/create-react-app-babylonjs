@@ -5645,9 +5645,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-babylonjs@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.3.2.tgz#50256ebcb0b207d11b9a30ae39c5010bcdbbab84"
+react-babylonjs@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.3.3.tgz#381c008e42871313bb5c0bfb074f4e87f9fab97c"
 
 react-dev-utils@^5.0.1:
   version "5.0.1"

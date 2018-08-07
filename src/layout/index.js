@@ -28,9 +28,9 @@ class Layout extends Component {
         };
     }
     toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+        this.setState((state) => ({
+            isOpen: !state.isOpen
+        }));
     }
     render() {
         return (
@@ -58,6 +58,11 @@ class Layout extends Component {
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">
                                     <Octicon icon={TriangleRight}/> With Model
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink to={`${process.env.PUBLIC_URL}/withVR`} activeClassName="active" className="nav-link">
+                                    <Octicon icon={TriangleRight}/> With VR
                                 </NavLink>
                             </NavItem>
                         </Nav>

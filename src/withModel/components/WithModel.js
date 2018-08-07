@@ -24,31 +24,31 @@ class WithModel extends Component
   }
 
   moveAvocadoDown() {
-    this.setState({
-      ...this.state,
-      avocadoYPos: this.state.avocadoYPos - 0.005
-    })
+    this.setState((state) => ({
+      ...state,
+      avocadoYPos: state.avocadoYPos - 0.005
+    }))
   }
 
   moveAvocadoUp() {
-    this.setState({
-      ...this.state,
-      avocadoYPos: this.state.avocadoYPos + 0.005
-    })
+    this.setState((state) => ({
+      ...state,
+      avocadoYPos: state.avocadoYPos + 0.005
+    }))
   }
 
   increaseAvocadoSize() {
-    this.setState({
-      ...this.state,
-      avocadoScaling: this.state.avocadoScaling + 0.025
-    })
+    this.setState((state) => ({
+      ...state,
+      avocadoScaling: state.avocadoScaling + 0.025
+    }))
   }
 
   decreaseAvocadoSize() {
-    this.setState({
-      ...this.state,
-      avocadoScaling: this.state.avocadoScaling - 0.025
-    })
+    this.setState((state) => ({
+      ...state,
+      avocadoScaling: state.avocadoScaling - 0.025
+    }))
   }
 
   render() {

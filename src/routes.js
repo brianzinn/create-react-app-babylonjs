@@ -5,6 +5,7 @@ import Layout from './layout';
 import DefaultPlayground from './defaultPlayground/components/DefaultPlayground';
 import WithProps from  './withProps/components/WithProps';
 import WithModel from  './withModel/components/WithModel';
+import WithVR from  './withVR/components/WithVR';
 import Home from './home/components'
 
 export const routes = (
@@ -14,6 +15,7 @@ export const routes = (
             <Route path={`${process.env.PUBLIC_URL}/defaultPlayground`} component={DefaultPlayground} />
             <Route path={`${process.env.PUBLIC_URL}/withProps`} component={WithProps} />
             <Route path={`${process.env.PUBLIC_URL}/withModel`} component={WithModel} />
+            <Route path={`${process.env.PUBLIC_URL}/withVR`} component={WithVR} />
         </Switch>
     </Layout>
 );

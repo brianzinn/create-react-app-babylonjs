@@ -16,6 +16,9 @@ const Home = () => (
     <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">
       <Octicon icon={TriangleRight}/> With Model
     </NavLink>
+    <NavLink to={`${process.env.PUBLIC_URL}/withVR`} activeClassName="active" className="nav-link">
+      <Octicon icon={TriangleRight}/> With VR
+    </NavLink>
   </div>
 )
 
