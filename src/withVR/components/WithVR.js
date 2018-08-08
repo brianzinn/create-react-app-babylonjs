@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
 import {
-  Scene, FreeCamera, HemisphericLight, Model, Box, StandardMaterial, VRExperience
+  Scene, FreeCamera, HemisphericLight, Model, Box, StandardMaterial, VRExperience, RotateMeshBehaviour
 } from 'react-babylonjs'
-import { Vector3, Color3 } from 'babylonjs';
+import { Vector3, Color3, Axis } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowRight, ArrowLeft} from '@githubprimer/octicons-react'
 
@@ -72,6 +72,7 @@ class WithVR extends Component
                   diffuseColor={Color3.Yellow()}
                   specularColor={Color3.Black()}
                 />
+                <RotateMeshBehaviour radians={0.01} axis={Axis.Y} />
               </Box>
               <Model
                 rotation= {new Vector3(0, this.state.modelRotationY, 0)}
@@ -84,6 +85,7 @@ class WithVR extends Component
                   diffuseColor={Color3.FromInts(255, 165, 0)}
                   specularColor={Color3.Black()}
                 />
+                <RotateMeshBehaviour radians={-0.01} axis={Axis.Y} />
               </Box>
               <VRExperience />
             </Scene>

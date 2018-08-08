@@ -11,7 +11,7 @@
     "bootstrap": "4.1.1",
     "connected-react-router": "^4.3.0",
     "react": "^16.4.1",
-    "react-babylonjs": "^0.3.3",
+    "react-babylonjs": "^0.3.4",
     "react-dom": "^16.4.1",
     "react-prism": "^4.3.2",
     "react-redux": "^5.0.7",
