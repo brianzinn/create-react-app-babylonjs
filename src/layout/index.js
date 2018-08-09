@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    Container,
-    Row,
-    Col
-} from 'reactstrap';
+import { Navbar, Nav, NavItem } from 'reactstrap';
 
 import Octicon, { Home, TriangleRight, MarkGithub } from '@githubprimer/octicons-react'
 
@@ -66,11 +56,11 @@ class Layout extends Component {
             <div>
                 <div className="wrapper">
                     <nav id="sidebar">
-                        <div class="sidebar-header">
+                        <div className="sidebar-header">
                             <h3 className="sidebar-h3">React + BabylonJS</h3>
                         </div>
 
-                        <ul class="list-unstyled components">
+                        <ul className="list-unstyled components">
                             <h3 className="sidebar-h3">Examples</h3>
                             <NavItem>
                                 <NavLink exact={true} to={`${process.env.PUBLIC_URL}/`} activeClassName="active" className="nav-link">
@@ -98,18 +88,18 @@ class Layout extends Component {
                                 </NavLink>
                             </NavItem>
                         </ul>
-                        <ul class="list-unstyled CTAs">
+                        <ul className="list-unstyled CTAs">
                             <li>
-                                <a href="https://github.com/brianzinn/create-react-app-babylonjs" class="download">this project <Octicon icon={ MarkGithub }/></a>
+                                <a href="https://github.com/brianzinn/create-react-app-babylonjs" className="download">this project <Octicon icon={ MarkGithub }/></a>
                             </li>
                             <li>
-                                <a href="https://github.com/brianzinn/react-babylonjs" class="download">react-babylonjs <Octicon icon={ MarkGithub }/></a>
+                                <a href="https://github.com/brianzinn/react-babylonjs" className="download">react-babylonjs <Octicon icon={ MarkGithub }/></a>
                             </li>
                         </ul>
                     </nav>
                     <div id="content">
                         <Navbar color="dark" className="navbar-dark" expand>
-                            <button type="button" id="sidebarCollapse" class="navbar-btn" onClick={this.toggle}>
+                            <button type="button" id="sidebarCollapse" className="navbar-btn" onClick={this.toggle}>
                                 <span></span>
                                 <span></span>
                                 <span></span>

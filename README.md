@@ -44,14 +44,16 @@ Can be done purely with React Components and zero code.
 You can easily control BabylonJS models as well.  This sample loads 3D models and controls them with buttons.
 live demo: [with model](https://brianzinn.github.io/create-react-app-babylonjs/withModel)
 live demo: [with props](https://brianzinn.github.io/create-react-app-babylonjs/withProps)
-```xml
+```jsx
 class WithModel extends React.Component 
 {
   ...
   render() {
     return (
       <Scene id="sample-canvas">
-        <ArcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2} radius={0.075} target={Vector3.Zero()} minZ={0.001} />
+        <ArcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2}
+          radius={0.075} target={Vector3.Zero()} minZ={0.001}
+        />
         <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
         <Model
           position={ new Vector3(0.02, 0, 0)}
@@ -63,6 +65,55 @@ class WithModel extends React.Component
   }
 }
 ```
+
+```jsx
+class WithVR extends React.Component
+{
+  render() {
+    return (
+      <Scene id="sample-canvas" onMeshPicked={this.onMeshPicked}>
+        <ArcRotateCamera name="arc"
+          target={ new Vector3(0, 1, 0) }
+          alpha={-Math.PI / 2}
+          beta={(0.5 + (Math.PI / 4))}
+          radius={2}
+          minZ={0.001} />
+
+        <DirectionalLight name="dl" direction={new Vector3(0, -0.5, 0.5)} position = {new Vector3(0, 2, 0.5)}>
+          <ShadowGenerator mapSize={1024} useBlurExponentialShadowMap={true} blurKernel={32}
+            shadowCasters={["counterClockwise", "clockwise", "BoomBox"]}
+          />
+        </DirectionalLight>
+
+        <IcoSphere name="counterClockwise" position={new Vector3(-0.5, 1, 0)} radius={0.2} flat={true} subdivisions={1}>
+          <StandardMaterial
+            diffuseColor={Color3.Yellow()}
+            specularColor={Color3.Black()}
+          />
+          <RotateMeshBehaviour radians={0.01} axis={Axis.Y} />
+        </IcoSphere>
+        <Model
+          rotation= {new Vector3(0, this.state.modelRotationY, 0)}
+          position={ new Vector3(0, 1, 0)}
+          rootUrl = {`${baseUrl}BoomBox/glTF/`}
+          sceneFilename="BoomBox.gltf"
+          scaling={ new Vector3(20, 20, 20) }
+        />
+        <IcoSphere name="clockwise" position={new Vector3(0.5, 1, 0)} radius={0.2} flat={true} subdivisions={1}>
+          <StandardMaterial
+            diffuseColor={Color3.FromInts(255, 165, 0)}
+            specularColor={Color3.Black()}
+          />
+          <RotateMeshBehaviour radians={-0.01} axis={Axis.Y} />
+        </IcoSphere>
+        <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} />
+        <Environment enableGroundShadow= {true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
+      </Scene>
+    )
+  }
+}
+```
+
 ## Code only
 ```jsx
 <Scene id="sample-canvas" onSceneMount={this.loadScene} />

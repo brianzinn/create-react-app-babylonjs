@@ -1,8 +1,4 @@
 import React from 'react'
-import Octicon, { TriangleRight} from '@githubprimer/octicons-react'
-import {
-  NavLink
-} from 'react-router-dom'
 
 const Home = () => (
   <div>
