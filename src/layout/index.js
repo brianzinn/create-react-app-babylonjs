@@ -74,17 +74,22 @@ class Layout extends Component {
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withProps`} activeClassName="active" className="nav-link">
-                                    <Octicon icon={ TriangleRight }/> With Props
+                                    <Octicon icon={ TriangleRight }/>  Props
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">
-                                    <Octicon icon={ TriangleRight }/> With Model
+                                    <Octicon icon={ TriangleRight }/>  Model
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withVR`} activeClassName="active" className="nav-link">
-                                    <Octicon icon={ TriangleRight }/> With VR
+                                    <Octicon icon={ TriangleRight }/>  VR
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink to={`${process.env.PUBLIC_URL}/withSkybox`} activeClassName="active" className="nav-link">
+                                    <Octicon icon={ TriangleRight }/>  Skybox
                                 </NavLink>
                             </NavItem>
                         </ul>
@@ -120,6 +125,9 @@ class Layout extends Component {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink to={`${process.env.PUBLIC_URL}/withVR`} activeClassName="active" className="nav-link">With VR</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink to={`${process.env.PUBLIC_URL}/withSkybox`} activeClassName="active" className="nav-link">With Skybox</NavLink>
                                 </NavItem>
                             </Nav>
                         </Navbar>
