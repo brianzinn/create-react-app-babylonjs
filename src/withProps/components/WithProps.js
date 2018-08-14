@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Scene, FreeCamera, HemisphericLight, Box, RotateMeshBehaviour } from 'react-babylonjs'
+import { Scene, FreeCamera, HemisphericLight, Box, RotateMeshBehavior } from 'react-babylonjs'
 import { Vector3, Axis } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Switch from "react-switch";
@@ -69,7 +69,7 @@ class WithProps extends Component
               <FreeCamera name="camera1" position={new Vector3(0, 5, -10)} target={Vector3.Zero()} />
               <HemisphericLight name="light1" intensity={this.state.intensity} direction={Vector3.Up()} />
               <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
-                <RotateMeshBehaviour radians={this.state.clockwiseChecked ? 0.01 : -0.01} axis={Axis.Y} />
+                <RotateMeshBehavior radians={this.state.clockwiseChecked ? 0.01 : -0.01} axis={Axis.Y} />
               </Box>
             </Scene>
           </div>
@@ -82,7 +82,7 @@ class WithProps extends Component
   <HemisphericLight name="light1"
     intensity={this.state.intensity} direction={Vector3.Up()} />
   <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
-    <RotateMeshBehaviour axis={Axis.Y}
+    <RotateMeshBehavior axis={Axis.Y}
       radians={this.state.clockwiseChecked ? 0.01 : -0.01} />
   </Box>
 </Scene>`}

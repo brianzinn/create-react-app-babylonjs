@@ -74,22 +74,22 @@ class Layout extends Component {
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withProps`} activeClassName="active" className="nav-link">
-                                    <Octicon icon={ TriangleRight }/>  Props
+                                    <Octicon icon={ TriangleRight }/> Props
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">
-                                    <Octicon icon={ TriangleRight }/>  Model
+                                    <Octicon icon={ TriangleRight }/> Model
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withVR`} activeClassName="active" className="nav-link">
-                                    <Octicon icon={ TriangleRight }/>  VR
+                                    <Octicon icon={ TriangleRight }/> VR
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withSkybox`} activeClassName="active" className="nav-link">
-                                    <Octicon icon={ TriangleRight }/>  Skybox
+                                    <Octicon icon={ TriangleRight }/> Skybox (+3D panel)
                                 </NavLink>
                             </NavItem>
                         </ul>
@@ -118,16 +118,16 @@ class Layout extends Component {
                                     <NavLink to={`${process.env.PUBLIC_URL}/defaultPlayground`} activeClassName="active" className="nav-link">Default Playground</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink to={`${process.env.PUBLIC_URL}/withProps`} activeClassName="active" className="nav-link">With Props</NavLink>
+                                    <NavLink to={`${process.env.PUBLIC_URL}/withProps`} activeClassName="active" className="nav-link">Props</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">With Model</NavLink>
+                                    <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">Model</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink to={`${process.env.PUBLIC_URL}/withVR`} activeClassName="active" className="nav-link">With VR</NavLink>
+                                    <NavLink to={`${process.env.PUBLIC_URL}/withVR`} activeClassName="active" className="nav-link">VR</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink to={`${process.env.PUBLIC_URL}/withSkybox`} activeClassName="active" className="nav-link">With Skybox</NavLink>
+                                    <NavLink to={`${process.env.PUBLIC_URL}/withSkybox`} activeClassName="active" className="nav-link">Skybox (+3D panel)</NavLink>
                                 </NavItem>
                             </Nav>
                         </Navbar>

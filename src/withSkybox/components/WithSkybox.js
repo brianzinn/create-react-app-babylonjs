@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import { Scene, Skybox, HemisphericLight, ArcRotateCamera } from 'react-babylonjs';
+import {
+  Scene, Skybox, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, HolographicButton, VRExperience
+} from 'react-babylonjs';
 import { Vector3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowRight, ArrowLeft} from '@githubprimer/octicons-react';
@@ -43,11 +45,14 @@ export default class WithSkybox extends Component
   }
 
   render() {
+
+    const activeSkybox = this.skyboxScenes[this.state.skyboxIndex % this.skyboxScenes.length];
+
     return (
       <div>
         <div className="row">
           <div className="col-xs-12 col-lg-12 align-top">
-            Change Skybox: 
+            Change Skybox (or click a holographic button in scene):&nbsp;
             <Button onClick={this.previous}><Octicon icon={ArrowLeft}/></Button>
             &nbsp;&nbsp;
             <Button onClick={this.next}><Octicon icon={ArrowRight}/></Button>
@@ -56,33 +61,55 @@ export default class WithSkybox extends Component
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <Scene id="sample-canvas">
-              <Skybox texture={this.skyboxScenes[this.state.skyboxIndex % this.skyboxScenes.length].texture} />
               <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
-              <ArcRotateCamera name="arc"
-                target={ new Vector3(0, 1, 0) }
-                alpha={Math.PI / 2}
-                beta={(Math.PI / 2)}
-                radius={2}
-                minZ={0.001} />
+              <Skybox texture={activeSkybox.texture} />
+              <ArcRotateCamera target={ Vector3.Zero() } radius={10}
+                alpha={-Math.PI / 2} beta={(Math.PI / 2)}
+              />
+              <GUI3DManager name="gui3d">
+                <CylinderPanel name="panel" margin={0.2}>
+                  {
+                    Array.from(new Array(60), (_, index) => index).map(number => {
+                      return (
+                        <HolographicButton
+                          key={`btn-${number}`}
+                          name={`btn-name-${number}`}
+                          text={`btn-text-${number}`}
+                          onClick={this.next}
+                        />
+                      )
+                    })
+                  }
+                </CylinderPanel>
+              </GUI3DManager>
+              <VRExperience createDeviceOrientationCamera={false} />
             </Scene>
           </div>
           <div className="col-xs-12 col-md-6">
             <pre>
                 <PrismCode className="language-jsx">
-{`<Scene id="sample-canvas" onMeshPicked={(mesh, scene) => {...}}>
-  <ArcRotateCamera />
-  <DirectionalLight name="dl" direction={new Vector3(0, -0.5, 0.5)} position = {new Vector3(0, 2, 0.5)}>
-    <ShadowGenerator mapSize={1024} useBlurExponentialShadowMap={true} blurKernel={32}
-      shadowCasters={["counterClockwise", "clockwise", "BoomBox"]}
-    />
-  </DirectionalLight>
-  <IcoSphere name="counterClockwise" radius={0.2} flat={true} subdivisions={1}>
-    <StandardMaterial diffuseColor={Color3.Yellow()} specularColor={Color3.Black()}/>
-  </IcoSphere>
-  <Model rootUrl = {'/assets/BoomBox/glTF/'}
-    sceneFilename='BoomBox.gltf' />
-  <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} />
-  <Environment enableGroundShadow={true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
+{`<Scene id="sample-canvas">
+<HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
+<Skybox texture={activeSkybox.texture} />
+<ArcRotateCamera target={ Vector3.Zero() } radius={10}
+  alpha={-Math.PI / 4} beta={(Math.PI / 2)}
+/>
+<GUI3DManager name="gui3d">
+  <CylinderPanel name="panel" margin={0.2}>
+    {
+      Array.from(new Array(60), (_, index) => index).map(number => {
+        return (
+          <HolographicButton
+            key={\`btn-\${number}\`}
+            name={\`btn-name-\${number}\`}
+            text={\`btn-text-\${number}\`}
+            onClick={this.next}
+          />
+        )
+      })
+    }
+  </CylinderPanel>
+</GUI3DManager>
 </Scene>`}
                 </PrismCode>
               </pre>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
 import {
-  Scene, ArcRotateCamera, Model, StandardMaterial, VRExperience, RotateMeshBehaviour, IcoSphere, 
+  Scene, ArcRotateCamera, Model, StandardMaterial, VRExperience, RotateMeshBehavior, IcoSphere, 
   DirectionalLight, ShadowGenerator, Environment
 } from 'react-babylonjs'
 import { Vector3, Color3, Axis } from 'babylonjs';
@@ -82,7 +82,7 @@ class WithVR extends Component
                   diffuseColor={Color3.Yellow()}
                   specularColor={Color3.Black()}
                 />
-                <RotateMeshBehaviour radians={0.01} axis={Axis.Y} />
+                <RotateMeshBehavior radians={0.01} axis={Axis.Y} />
               </IcoSphere>
               <Model
                 rotation= {new Vector3(0, this.state.modelRotationY, 0)}
@@ -96,7 +96,7 @@ class WithVR extends Component
                   diffuseColor={Color3.FromInts(255, 165, 0)}
                   specularColor={Color3.Black()}
                 />
-                <RotateMeshBehaviour radians={-0.01} axis={Axis.Y} />
+                <RotateMeshBehavior radians={-0.01} axis={Axis.Y} />
               </IcoSphere>
               <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} />
               <Environment enableGroundShadow= {true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />

@@ -24,6 +24,8 @@ npm install babylonjs
 npm install react-babylonjs
 ```
 
+If you are using the 3D GUI components then you will need 'babylonjs-gui' and if you are loading 3D models 'babylonjs-loaders'.
+
 A BabylonJS scene to your webpage in either a declarative manner or code manner (or combination).
 
 ## 100% Declarative
@@ -34,7 +36,7 @@ Can be done purely with React Components and zero code.
     <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
     <Sphere name="sphere1" diameter={2} segments={16} position={new Vector3(0, 1, 0)} />
     <Box name="box" size={1.7} position={new Vector3(0, 1, 0)}>
-        <RotateMeshBehaviour radians={0.01} axis={Axis.Y} />
+        <RotateMeshBehavior radians={0.01} axis={Axis.Y} />
     </Box>
     <Ground name="ground1" width={6} height={6} subdivisions={2}  />
 </Scene>
@@ -90,7 +92,7 @@ class WithVR extends React.Component
             diffuseColor={Color3.Yellow()}
             specularColor={Color3.Black()}
           />
-          <RotateMeshBehaviour radians={0.01} axis={Axis.Y} />
+          <RotateMeshBehavior radians={0.01} axis={Axis.Y} />
         </IcoSphere>
         <Model
           rotation= {new Vector3(0, this.state.modelRotationY, 0)}
@@ -104,7 +106,7 @@ class WithVR extends React.Component
             diffuseColor={Color3.FromInts(255, 165, 0)}
             specularColor={Color3.Black()}
           />
-          <RotateMeshBehaviour radians={-0.01} axis={Axis.Y} />
+          <RotateMeshBehavior radians={-0.01} axis={Axis.Y} />
         </IcoSphere>
         <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} />
         <Environment enableGroundShadow= {true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
