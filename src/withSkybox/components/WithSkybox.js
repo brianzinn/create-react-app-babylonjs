@@ -20,10 +20,10 @@ export default class WithSkybox extends Component
 
     this.skyboxScenes = [{
       name: 'sunny day',
-      texture: 'textures/TropicalSunnyDay'
+      texture: `${process.env.PUBLIC_URL}/textures/TropicalSunnyDay`
     }, {
       name: 'specular HDR',
-      texture: '/textures/SpecularHDR.dds'
+      texture: `${process.env.PUBLIC_URL}/textures/SpecularHDR.dds`
     }]
 
     this.previous = this.previous.bind(this);
