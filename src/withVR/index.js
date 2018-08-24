@@ -8,9 +8,7 @@ import { Vector3, Color3, Axis } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowRight, ArrowLeft} from '@githubprimer/octicons-react'
 
-import './WithVR.css'
-
-class WithVR extends Component 
+export default class WithVR extends Component 
 {
   constructor() {
     super();
@@ -128,5 +126,3 @@ class WithVR extends Component
     )
   }
 }
-
-export default WithVR

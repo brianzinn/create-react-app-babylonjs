@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Layout from './layout';
-import DefaultPlayground from './defaultPlayground/components/DefaultPlayground';
-import WithProps from  './withProps/components/WithProps';
-import WithModel from  './withModel/components/WithModel';
-import WithVR from  './withVR/components/WithVR';
-import WithSkybox from  './withSkybox/components/WithSkybox';
+import DefaultPlayground from './defaultPlayground/';
+import WithProps from  './withProps/components/WithProps'; // has reducers, too
+import WithModel from  './withModel/';
+import WithVR from  './withVR/';
+import WithSkybox from  './withSkybox/';
+import With2DUI from './with2DUI/'
 import Home from './home/components'
 
 export const routes = (
@@ -18,6 +19,7 @@ export const routes = (
             <Route path={`${process.env.PUBLIC_URL}/withModel`} component={WithModel} />
             <Route path={`${process.env.PUBLIC_URL}/withVR`} component={WithVR} />
             <Route path={`${process.env.PUBLIC_URL}/withSkybox`} component={WithSkybox} />
+            <Route path={`${process.env.PUBLIC_URL}/with2DUI`} component={With2DUI} />
         </Switch>
     </Layout>
 );

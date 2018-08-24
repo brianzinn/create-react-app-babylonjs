@@ -4,9 +4,7 @@ import { Vector3, Axis } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Switch from "react-switch";
 
-import './WithProps.css'
-
-class WithProps extends Component 
+export default class WithProps extends Component 
 {
   constructor() {
     super();
@@ -94,5 +92,3 @@ class WithProps extends Component
     )
   }
 }
-
-export default WithProps

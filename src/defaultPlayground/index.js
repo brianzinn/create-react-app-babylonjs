@@ -3,8 +3,6 @@ import { Scene, FreeCamera, HemisphericLight, Sphere, Ground } from 'react-babyl
 import { Vector3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 
-import './DefaultPlayground.css'
-
 const DefaultPlayground = () => (
   <div className="row">
     <div className="col-xs-12 col-md-6">

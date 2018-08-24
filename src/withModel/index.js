@@ -5,7 +5,7 @@ import { Vector3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowDown, ArrowUp} from '@githubprimer/octicons-react'
 
-import './WithModel.css'
+// import './WithModel.css'
 
 class WithModel extends Component 
 {

@@ -7,8 +7,6 @@ import { Vector3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowRight, ArrowLeft} from '@githubprimer/octicons-react';
 
-import './WithSkybox.css'
-
 export default class WithSkybox extends Component 
 {
   constructor() {

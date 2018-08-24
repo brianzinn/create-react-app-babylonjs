@@ -88,6 +88,11 @@ class Layout extends Component {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink to={`${process.env.PUBLIC_URL}/with2DUI`} activeClassName="active" className="nav-link">
+                                    <Octicon icon={ TriangleRight }/> Panel (+2D UI)
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withSkybox`} activeClassName="active" className="nav-link">
                                     <Octicon icon={ TriangleRight }/> Skybox (+3D panel)
                                 </NavLink>
@@ -129,9 +134,14 @@ class Layout extends Component {
                                 <NavItem>
                                     <NavLink to={`${process.env.PUBLIC_URL}/withSkybox`} activeClassName="active" className="nav-link">Skybox (+3D panel)</NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink to={`${process.env.PUBLIC_URL}/with2DUI`} activeClassName="active" className="nav-link">UI (+2D panel)</NavLink>
+                                </NavItem>
                             </Nav>
                         </Navbar>
-                        {this.props.children}
+                        <div style={{marginTop: '-35px'}}>
+                            {this.props.children}
+                        </div>
                     </div>
                 </div>
             </div>
