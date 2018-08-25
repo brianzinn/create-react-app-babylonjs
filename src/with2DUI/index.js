@@ -29,13 +29,28 @@ export default class With2DUI extends Component
   }
 
   meshPicked(mesh) {
-    console.log('clicked mesh:', mesh.name)
-    if (this.state.allowedMeshes.indexOf(mesh.name) !== -1)
-    {
+    if (this.state.allowedMeshes.indexOf(mesh.name) !== -1) {
+
+      const clickedMeshName = mesh.name
+      let clickedMeshColor;
+      switch(clickedMeshName) {
+        case 'red box':
+          clickedMeshColor = Color3.Red().toHexString()
+          break;
+        case 'blue box':
+          clickedMeshColor = Color3.Blue().toHexString()
+          break;
+        case 'green box':
+        default:
+          clickedMeshColor = Color3.Green().toHexString()
+          break;
+      }
+
       this.setState((state) => ({
         ...state,
         showModal: true,
-        clickedMeshName: mesh.name
+        clickedMeshName,
+        clickedMeshColor
       }))
     } else {
       console.log('ignoring clicks on:', mesh.name, this.state)
@@ -52,12 +67,13 @@ export default class With2DUI extends Component
       allowedMeshes: state.allowedMeshes.filter(name => name !== state.clickedMeshName)
     }))
 
+    // TODO: if they're all 'deleted' - recreate them?
     this.hideModal();
   }
 
-  hideModal(v2, eventState) {
+  hideModal() {
     let { plane } = this.state
-
+    console.log('hiding model:', plane);
     if (!plane) {
       return;
     }
@@ -91,21 +107,19 @@ export default class With2DUI extends Component
   }
 
   setCamera(camera) {
-    console.log('setting camera');
     // not adding remove(..), as whole scene unloads then.
     camera.onViewMatrixChangedObservable.add(() => {
       let { plane } = this.state
 
       if (plane) {
         let forwardRay = camera.getForwardRay();
-        plane.position = camera.position.add(forwardRay.direction.scale(0.9 /* * forwardRay.length */));
+        plane.position = camera.position.clone().add(forwardRay.direction.scale(1.3 /* * forwardRay.length */));
         plane.lookAt(camera.position);
       }
     })
   }
 
   setPlane(plane) {
-    console.log('setting plane:', plane)
     this.setState((state) => ({
       ...state,
       plane
@@ -114,7 +128,7 @@ export default class With2DUI extends Component
     if (plane._scene && plane._scene.activeCamera) {
       let { activeCamera } = plane._scene
       let forwardRay = activeCamera.getForwardRay();
-      plane.position = activeCamera.position.add(forwardRay.direction.scale(0.9 /* * forwardRay.length */));
+      plane.position = activeCamera.position.clone().add(forwardRay.direction.scale(1.3 /* * forwardRay.length */));
       plane.lookAt(activeCamera.position);
     }
   }
@@ -135,70 +149,73 @@ export default class With2DUI extends Component
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-<Scene id="sample-canvas" onMeshPicked={this.meshPicked}>
-  <ArcRotateCamera name="camera1" radius={7} beta={Math.PI / 4} target={Vector3.Zero()} minZ={0.001} onCreated={this.setCamera} />
-  <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
-  <Box size={2} name="red box" position={new Vector3(-2.5, 1, 0)}>
-    <StandardMaterial diffuseColor={Color3.Red()} specularColor={Color3.Black()}/>
-  </Box>
-  <Box size={2} name="blue box" position={new Vector3(0, 1, 0)}>
-    <StandardMaterial diffuseColor={Color3.Blue()} specularColor={Color3.Black()}/>
-  </Box>
-  <Box size={2} name="green box" position={new Vector3(2.5, 1, 0)}>
-    <StandardMaterial diffuseColor={Color3.Green()} specularColor={Color3.Black()}/>
-  </Box>
-  {this.state.showModal === true &&
-    <Plane name="dialog" width={1} height={dialogHeight/dialogWidth} onCreated={this.setPlane}>
-      <AdvancedDynamicTexture createForParentMesh={true}>
-        <Rectangle background="white" color="#666666" height={dialogHeight/dialogWidth} width={1}
-          scaleY={dialogWidth} scaleX={1}  thickness={2} cornerRadius={12} >
-          <StackPanel>
-            <Rectangle height="20%" paddingTop="6%">
-              <StackPanel isVertical={false}>
-                <Text text="Selection Made" color="black" fontSize={28} fontStyle="bold"
-                  textHorizontalAlignment={Control.HORIZONTAL_ALIGNMENT_LEFT}
-                  textVerticalAlignment={Control.VERTICAL_ALIGNMENT_TOP}
-                  paddingLeft="2%" paddingTop="6%" width="80%"
-                />
-                <Button background="white" paddingLeft="13%" width="18%" height="75%" onPointerDown={this.hideModal.bind(this)}>
-                  <Text text={'X'} fontStyle="bold" fontSize={24} color="black" />
-                </Button>
-              </StackPanel>
-            </Rectangle>
-            <Rectangle height="60%" thickness={2} color="#EEEEEE">
-              <StackPanel>
-              <Text key={`body-${this.state.clickedMeshName}`} text={`You have clicked on '${this.state.clickedMeshName}' .\n....${this.state.allowedMeshes.length} remaining...`}
-                  color="black" fontSize={28} textWrapping={true} height="40%"
-                  textHorizontalAlignment={Control.HORIZONTAL_ALIGNMENT_LEFT}
-                  textVerticalAlignment={Control.VERTICAL_ALIGNMENT_TOP}
-                  paddingLeft="2%" paddingTop="6%"
-                />
-                {
-                  this.state.allowedMeshes.map(allowedMesh => (
-                    <Text key={`opt--${this.state.clickedMeshName}-${allowedMesh}`} text={'• ' + allowedMesh} color="black" fontSize={28} height="20%"
-                      textHorizontalAlignment={Control.HORIZONTAL_ALIGNMENT_LEFT}
-                      textVerticalAlignment={Control.VERTICAL_ALIGNMENT_TOP}
-                      paddingLeft="6%"
-                    />
-                  ))
-                }
-              </StackPanel>
-            </Rectangle>
-            <StackPanel name="footer-sp" height="20%" isVertical={false}>
-              <Button background="#6c757d" paddingLeft="56%" width="70%" height="79%" cornerRadius={10} onPointerDown={this.hideModal.bind(this)}>
-                <Text text="Cancel" fontSize={28} fontStyle="bold" color="white" />
-              </Button>
-              <Button background="#007bff" paddingLeft="2%" width="28%" height="85%" cornerRadius={10} onPointerDown={this.deleteSelectedMesh.bind(this)}>
-                <Text text={ `Delete '${this.state.clickedMeshName}'` } fontSize={28} fontStyle="bold" color="white" />
-              </Button>
-            </StackPanel>
-          </StackPanel>
-        </Rectangle>
-      </AdvancedDynamicTexture>
-    </Plane>
-  }
-  <VRExperience createDeviceOrientationCamera={false} enableInteractions={true} />
-</Scene>
+            <Scene id="sample-canvas" onMeshPicked={this.meshPicked}>
+              <ArcRotateCamera name="camera1" radius={7} beta={Math.PI / 4} target={Vector3.Zero()} minZ={0.001}
+                onCreated={this.setCamera}
+              />
+              <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
+              <Box size={2} name="red box" position={new Vector3(-2.5, 1, 0)}>
+                <StandardMaterial diffuseColor={Color3.Red()} specularColor={Color3.Black()}/>
+              </Box>
+              <Box size={2} name="blue box" position={new Vector3(0, 1, 0)}>
+                <StandardMaterial diffuseColor={Color3.Blue()} specularColor={Color3.Black()}/>
+              </Box>
+              <Box size={2} name="green box" position={new Vector3(2.5, 1, 0)}>
+                <StandardMaterial diffuseColor={Color3.Green()} specularColor={Color3.Black()}/>
+              </Box>
+              {this.state.showModal === true &&
+                <Plane name="dialog" width={1} height={dialogHeight/dialogWidth} onCreated={this.setPlane}>
+                  <AdvancedDynamicTexture createForParentMesh={true}>
+                    <Rectangle background="white" color="#666666" height={dialogHeight/dialogWidth} width={1}
+                      scaleY={dialogWidth} scaleX={1}  thickness={2} cornerRadius={12} >
+                      <StackPanel>
+                        <Rectangle height="20%" paddingTop="6%">
+                          <StackPanel isVertical={false}>
+                            <Text text="Selection Made" color="black" fontSize={28} fontStyle="bold"
+                              textHorizontalAlignment={Control.HORIZONTAL_ALIGNMENT_LEFT}
+                              textVerticalAlignment={Control.VERTICAL_ALIGNMENT_TOP}
+                              paddingLeft="2%" paddingTop="6%" width="80%"
+                            />
+                            <Button background="white" paddingLeft="13%" width="18%" height="75%" onPointerDown={this.hideModal.bind(this)}>
+                              <Text text={'X'} fontStyle="bold" fontSize={24} color="black" />
+                            </Button>
+                          </StackPanel>
+                        </Rectangle>
+                        <Rectangle height="60%" thickness={2} color="#EEEEEE">
+                          <StackPanel>
+                          <Text key={`body-${this.state.clickedMeshName}`} text={`You have clicked on '${this.state.clickedMeshName}' .\n....${this.state.allowedMeshes.length} remaining...`}
+                              color="black" fontSize={28} textWrapping={true} height="40%"
+                              textHorizontalAlignment={Control.HORIZONTAL_ALIGNMENT_LEFT}
+                              textVerticalAlignment={Control.VERTICAL_ALIGNMENT_TOP}
+                              paddingLeft="2%" paddingTop="6%"
+                            />
+                            {
+                              this.state.allowedMeshes.map(allowedMesh => (
+                                <Text key={`opt--${this.state.clickedMeshName}-${allowedMesh}`} text={'• ' + allowedMesh} color="black" fontSize={28} height="20%"
+                                  textHorizontalAlignment={Control.HORIZONTAL_ALIGNMENT_LEFT}
+                                  textVerticalAlignment={Control.VERTICAL_ALIGNMENT_TOP}
+                                  paddingLeft="6%"
+                                />
+                              ))
+                            }
+                          </StackPanel>
+                        </Rectangle>
+                        <StackPanel name="footer-sp" height="20%" isVertical={false}>
+                          <Button background="#6c757d" paddingLeft="56%" width="70%" height="90%" cornerRadius={10} onPointerDown={this.hideModal.bind(this)}>
+                            <Text text="Cancel" fontSize={28} fontStyle="bold" color="white" />
+                          </Button>
+                          <Button background={this.state.clickedMeshColor} paddingLeft="2%" width="28%" height="90%"
+                            cornerRadius={10} onPointerDown={this.deleteSelectedMesh.bind(this)}>
+                            <Text text={ `Delete '${this.state.clickedMeshName}'` } fontSize={28} fontStyle="bold" color="white" />
+                          </Button>
+                        </StackPanel>
+                      </StackPanel>
+                    </Rectangle>
+                  </AdvancedDynamicTexture>
+                </Plane>
+              }
+              <VRExperience createDeviceOrientationCamera={false} enableInteractions={true} />
+            </Scene>
           </div>
           <div className="col-xs-12 col-md-6">
             <pre>
