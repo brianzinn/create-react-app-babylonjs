@@ -117,8 +117,44 @@ class WithVR extends React.Component
 ```
 
 ## Code only
+You don't need to rely on the declarative Components except for Scene and are free to completely create your own scenes and even control the runRenderLoop() logic.  You are provided a created Scene (and Engine via scene.getEngine()) and loaded HTML5 canvas reference.
 ```jsx
-<Scene id="sample-canvas" onSceneMount={this.loadScene} />
+export default class NonDeclarative extends Component 
+{
+  meshPicked(mesh) {
+    console.log('mesh picked:', mesh)
+  }
+
+  onSceneMount(e) {
+    const { canvas, scene } = e
+
+    // Scene to build your environment, Canvas you need to attach your camera.       
+    var camera = new ArcRotateCamera("Camera", 0, 1.05, 6, Vector3.Zero(), scene)
+    camera.attachControl(canvas)
+
+    // if you want to set the shader directory, use the "shadersRepository" prop.
+    // var shader = new ShaderMaterial("gradient", scene, "gradient", {})
+
+    MeshBuilder.CreateBox('box', { size: 3}, scene)
+
+    new HemisphericLight('light', Vector3.Up(), scene);
+
+    // TODO: setup your scene here
+    scene.getEngine().runRenderLoop(() => {
+        if (scene) {
+            scene.render();
+        }
+    });
+}
+
+render() {
+  return (
+    <Scene
+      onMeshPicked={this.meshPicked}
+      onSceneMount={this.onSceneMount}
+    />)
+  }
+}
 ```
 ## TODO: 
 1. Add full example for code only as well as a code/declarative combination and new createCamera() usage example.

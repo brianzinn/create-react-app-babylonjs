@@ -97,6 +97,11 @@ class Layout extends Component {
                                     <Octicon icon={ TriangleRight }/> Skybox (+3D panel)
                                 </NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink to={`${process.env.PUBLIC_URL}/nonDeclarative`} activeClassName="active" className="nav-link">
+                                    <Octicon icon={ TriangleRight }/> Non-Declarative
+                                </NavLink>
+                            </NavItem>
                         </ul>
                         <ul className="list-unstyled CTAs">
                             <li>
@@ -136,6 +141,9 @@ class Layout extends Component {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink to={`${process.env.PUBLIC_URL}/with2DUI`} activeClassName="active" className="nav-link">UI (+2D panel)</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink to={`${process.env.PUBLIC_URL}/nonDeclarative`} activeClassName="active" className="nav-link">Non-Declarative</NavLink>
                                 </NavItem>
                             </Nav>
                         </Navbar>

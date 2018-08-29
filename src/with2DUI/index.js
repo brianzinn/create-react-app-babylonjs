@@ -141,7 +141,8 @@ export default class With2DUI extends Component
       <div>
         <div className="row">
           <div className="col-xs-6 col-lg-6 align-top">
-            Click on boxes to open UI for removing them.
+            Click on boxes to open UI for deleting them.<br />
+            Close dialog with <span style={{fontFamily:"FontAwesome"}}>{'\uf00d'}</span> or Cancel/Delete button.
           </div>
           <div className="col-xs-6 col-lg-6 align-top">
             How the GUI declared <span className="text-muted">(see github repo for full source)</span>
@@ -177,7 +178,7 @@ export default class With2DUI extends Component
                               paddingLeft="2%" paddingTop="6%" width="80%"
                             />
                             <Button background="white" paddingLeft="13%" width="18%" height="75%" onPointerDown={this.hideModal.bind(this)}>
-                              <Text text={'X'} fontStyle="bold" fontSize={24} color="black" />
+                              <Text text={'\uf00d'} fontFamily="FontAwesome" fontStyle="bold" fontSize={24} color="black" />
                             </Button>
                           </StackPanel>
                         </Rectangle>
