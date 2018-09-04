@@ -127,8 +127,8 @@ export default class With2DUI extends Component
 
     if (plane._scene && plane._scene.activeCamera) {
       let { activeCamera } = plane._scene
-      let forwardRay = activeCamera.getForwardRay();
-      plane.position = activeCamera.position.clone().add(forwardRay.direction.scale(1.3 /* * forwardRay.length */));
+      let forwardRayDirection = activeCamera.getForwardRay().direction;
+      plane.position = activeCamera.position.add(forwardRayDirection.scale(1.3 /* * forwardRay.length */));
       plane.lookAt(activeCamera.position);
     }
   }

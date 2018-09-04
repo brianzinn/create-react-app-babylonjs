@@ -1,6 +1,6 @@
 
 ## Starter Kit
-react-babylonjs aims to be an unopinionated module for integrating React and BabylonJS.  This is a sample project to help people get started.
+'react-babylonjs' aims to be an unopinionated module for integrating React and BabylonJS.  This is a sample project to help people get started.
 
 ## Using BabylonJS with ReactJS
 
@@ -24,7 +24,7 @@ npm install babylonjs
 npm install react-babylonjs
 ```
 
-If you are using the 3D GUI components then you will need 'babylonjs-gui' and if you are loading 3D models 'babylonjs-loaders'.
+If you are using the 3D GUI components then you will need 'babylonjs-gui' (3.3+) and if you are loading 3D models 'babylonjs-loaders'.
 
 A BabylonJS scene to your webpage in either a declarative manner or code manner (or combination).
 
@@ -132,14 +132,10 @@ export default class NonDeclarative extends Component
     var camera = new ArcRotateCamera("Camera", 0, 1.05, 6, Vector3.Zero(), scene)
     camera.attachControl(canvas)
 
-    // if you want to set the shader directory, use the "shadersRepository" prop.
-    // var shader = new ShaderMaterial("gradient", scene, "gradient", {})
-
-    MeshBuilder.CreateBox('box', { size: 3}, scene)
+    MeshBuilder.CreateBox('box', { size: 3 }, scene)
 
     new HemisphericLight('light', Vector3.Up(), scene);
 
-    // TODO: setup your scene here
     scene.getEngine().runRenderLoop(() => {
         if (scene) {
             scene.render();
@@ -157,8 +153,8 @@ render() {
 }
 ```
 ## TODO: 
-1. Add full example for code only as well as a code/declarative combination and new createCamera() usage example.
-2. Add Gizmo example with redo/undo - synced with React + BabylonJS.
+1. Add example with new createCamera() usage example.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 You can find out about bootstrapping and ejecting on that site.  This project has not been ejected.
