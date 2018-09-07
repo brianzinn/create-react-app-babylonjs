@@ -13,7 +13,7 @@
     "connected-react-router": "^4.4.0",
     "history": "^4.7.2",
     "react": "^16.4.2",
-    "react-babylonjs": "^0.4.2",
+    "react-babylonjs": "^0.4.6",
     "react-dom": "^16.4.2",
     "react-prism": "^4.3.2",
     "react-redux": "^5.0.7",

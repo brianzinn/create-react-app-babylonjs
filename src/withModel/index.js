@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
-import { Scene, ArcRotateCamera, HemisphericLight, Model } from 'react-babylonjs'
-import { Vector3 } from 'babylonjs';
+import { Scene, ArcRotateCamera, HemisphericLight, Model, Box, StandardMaterial } from 'react-babylonjs'
+import { Vector3, Matrix, Color3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowDown, ArrowUp} from '@githubprimer/octicons-react'
 
@@ -13,8 +13,10 @@ class WithModel extends Component
     super();
     
     this.state = {
-      avocadoYPos: -0.01,
-      avocadoScaling: 0.25
+      avocadoYPos: -1.5,
+      avocadoScaling: 3.0,
+      boomBoxLoadProgress: 0.0,
+      avocadoLoadProgress: 0.0
     }
 
     this.moveAvocadoUp = this.moveAvocadoUp.bind(this);
@@ -26,28 +28,28 @@ class WithModel extends Component
   moveAvocadoDown() {
     this.setState((state) => ({
       ...state,
-      avocadoYPos: state.avocadoYPos - 0.005
+      avocadoYPos: state.avocadoYPos - 0.5
     }))
   }
 
   moveAvocadoUp() {
     this.setState((state) => ({
       ...state,
-      avocadoYPos: state.avocadoYPos + 0.005
+      avocadoYPos: state.avocadoYPos + 0.5
     }))
   }
 
   increaseAvocadoSize() {
     this.setState((state) => ({
       ...state,
-      avocadoScaling: state.avocadoScaling + 0.025
+      avocadoScaling: state.avocadoScaling + 0.1
     }))
   }
 
   decreaseAvocadoSize() {
     this.setState((state) => ({
       ...state,
-      avocadoScaling: state.avocadoScaling - 0.025
+      avocadoScaling: state.avocadoScaling - 0.1
     }))
   }
 
@@ -72,19 +74,49 @@ class WithModel extends Component
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <Scene id="sample-canvas">
-              <ArcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2} radius={0.075} target={Vector3.Zero()} minZ={0.001} />
+              <ArcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2} radius={9.0} target={Vector3.Zero()} minZ={0.001} />
               <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
               <Model
-                position={ new Vector3(0.02, 0, 0)}
+                scaleToDimension={3}
+                onLoadProgress={(evt) => {
+                  if (evt.lengthComputable) {
+                    let boomBoxLoadProgress = evt.loaded / evt.total
+                    this.setState((prevState) => ({
+                      ...prevState,
+                      boomBoxLoadProgress
+                    }))
+                  }
+                }}
+                position={ new Vector3(2.5, 0, 0)}
                 rootUrl = {`${baseUrl}BoomBox/glTF/`}
                 sceneFilename="BoomBox.gltf"
               />
+              
+              {this.state.boomBoxLoadProgress < 1 &&
+                [<Box key="progress1" name="box" height={0.2} width={3} depth={0.1} position={new Vector3(4, 0, 2.1)}
+                  scaling = { new Vector3(this.state.boomBoxLoadProgress, 1, 1) }
+                  pivotMatrix={ Matrix.Translation(-3, 0, 0) }
+                  preTransformMatrix={ Matrix.Translation(-3 / 2, 0, 0) }>
+                  <StandardMaterial
+                    diffuseColor={Color3.FromInts(255, 165, 0)}
+                    specularColor={Color3.Black()}
+                  />
+                </Box>,              
+                <Box key="back1" name="box" height={0.2} width={3} depth={0.1} position={new Vector3(2.5, 0, 2.0)} />
+                ]
+              }
+              
               <Model
-                position={ new Vector3(-0.02, this.state.avocadoYPos, 0)}
+                position={ new Vector3(-3.0, this.state.avocadoYPos, 0)}
                 rootUrl={`${baseUrl}Avocado/glTF/`}
                 sceneFilename="Avocado.gltf"
-                scaling={new Vector3(this.state.avocadoScaling, this.state.avocadoScaling, this.state.avocadoScaling)}
-              />
+                onLoadProgress={(evt) => {
+                  if (!evt.lengthComputable) {
+                    console.log('length is not computable - no progress updates:', evt)
+                  }
+                }}
+                scaleToDimension = {this.state.avocadoScaling}
+              />              
             </Scene>
           </div>
           <div className="col-xs-12 col-md-6">
