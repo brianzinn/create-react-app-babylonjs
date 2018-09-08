@@ -96,7 +96,7 @@ export default class WithVR extends Component
                 />
                 <RotateMeshBehavior radians={-0.01} axis={Axis.Y} />
               </IcoSphere>
-              <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} />
+              <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} enableInteractions={true} />
               <Environment enableGroundShadow={true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
             </Scene>
           </div>

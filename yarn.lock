@@ -1015,23 +1015,23 @@ babylon@^6.17.0, babylon@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
-babylonjs-gltf2interface@3.3.0-beta.1:
-  version "3.3.0-beta.1"
-  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-3.3.0-beta.1.tgz#828d05d9fe26084450dffbe1cd766749182e0bda"
+babylonjs-gltf2interface@3.3.0-beta.5:
+  version "3.3.0-beta.5"
+  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-3.3.0-beta.5.tgz#fe7304cf5e7ae5fc802dec04b89dc9a44bbf077a"
 
-babylonjs-gui@3.3.0-beta.1:
-  version "3.3.0-beta.1"
-  resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-3.3.0-beta.1.tgz#7a8807e42c76219fa32bf7310e0a2e65138e34f7"
+babylonjs-gui@3.3.0-beta.5:
+  version "3.3.0-beta.5"
+  resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-3.3.0-beta.5.tgz#ccb75a1a921cd6f9863e0e8a26d2b8dfd0a0487c"
 
-babylonjs-loaders@3.3.0-beta.1:
-  version "3.3.0-beta.1"
-  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-3.3.0-beta.1.tgz#c0ca3b8d41e5070593fadf2c4a4a64cc66f57c1c"
+babylonjs-loaders@3.3.0-beta.5:
+  version "3.3.0-beta.5"
+  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-3.3.0-beta.5.tgz#8bfec3a1649a239fd9bf00c257c4e3105d76d6a3"
   dependencies:
-    babylonjs-gltf2interface "3.3.0-beta.1"
+    babylonjs-gltf2interface "3.3.0-beta.5"
 
-babylonjs@3.3.0-beta.1:
-  version "3.3.0-beta.1"
-  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-3.3.0-beta.1.tgz#72022f4ef8e3674d1794acddedb6b4fe3b96579f"
+babylonjs@3.3.0-beta.5:
+  version "3.3.0-beta.5"
+  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-3.3.0-beta.5.tgz#1da63d7e09abb3dcef384bb4ee91649fd6781dd4"
 
 balanced-match@^0.4.2:
   version "0.4.2"
@@ -5669,9 +5669,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-babylonjs@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.4.2.tgz#1f4c706309a857392f632dde77697b52abd80202"
+react-babylonjs@^0.4.7:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.4.7.tgz#e2b16a3f1a3745abbe93c2ff170fcead6624bece"
 
 react-dev-utils@^5.0.1:
   version "5.0.1"

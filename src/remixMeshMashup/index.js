@@ -251,7 +251,7 @@ export default class RemixMeshMashup extends Component
                   <StandardMaterial diffuseColor={Color3.FromInts(255, 165, 0)} specularColor={Color3.Black()} />
               </Box>              
               <Box height={0.2} width={3} depth={0.1} position={new Vector3(0, 0, 0.1)} visibility={this.state.modelLoadProgress === 1 ? 0 : 1} />
-              <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} />
+              <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} enableInteractions={true} />
               <Environment enableGroundShadow={true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
             </Scene>
           </Col>
