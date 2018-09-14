@@ -1,56 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { Navbar, Nav, NavItem } from 'reactstrap';
 import Octicon, { Home, TriangleRight, MarkGithub } from '@githubprimer/octicons-react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
+import { toggleSidebar } from '../reducers'
 import './layout.css'
 
 class Layout extends Component {
-    constructor(props) {
-        super(props);
-
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-            isOpen: false
-        };
-    }
-
-    toggleClass(el, className) {
-        var isToggled = false
-
-        if (el.classList) {
-            isToggled = el.classList.contains(className)
-        } else {
-            isToggled = !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
-        }
-
-        if (isToggled) {
-            if (el.classList) {
-                el.classList.remove(className)
-            } else {
-                var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
-                el.className = el.className.replace(reg, ' ')
-            }
-        } else {
-            if (el.classList) {
-                el.classList.add(className)
-            } else {
-                el.className += ' ' + className
-            }
-        }
-    }
-
-    toggle(proxy) {
-        // console.log('target', proxy.target) // can be a click on the span, using ID
-        this.toggleClass(document.getElementById('sidebar'), 'active');
-        this.toggleClass(document.getElementById('sidebarCollapse'), 'active');
-    }
 
     render() {
+        var sideBarClassNames = classNames({
+            'active': !this.props.showSidebar
+        })
+
+        var sideBarCollapseClassNames = classNames(
+            {'active': !this.props.showSidebar},
+            'navbar-btn'
+        )
+
         return (
             <div>
                 <div className="wrapper">
-                    <nav id="sidebar">
+                    <nav id="sidebar" className={sideBarClassNames}>
                         <div className="sidebar-header">
                             <h3 className="sidebar-h3">React + BabylonJS</h3>
                         </div>
@@ -115,7 +90,7 @@ class Layout extends Component {
                     </nav>
                     <div id="content">
                         <Navbar color="dark" className="navbar-dark" expand>
-                            <button type="button" id="sidebarCollapse" className="navbar-btn" onClick={this.toggle}>
+                            <button type="button" id="sidebarCollapse" className={sideBarCollapseClassNames} onClick={this.props.onToggleSidebar}>
                                 <span></span>
                                 <span></span>
                                 <span></span>
@@ -161,4 +136,25 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+Layout.propTypes = {
+    sidebarCollapsed: PropTypes.bool.isRequired,
+    onToggleSidebar: PropTypes.func.isRequired
+  }
+  
+const mapDispatchToProps = dispatch => {
+    return {
+        onToggleSidebar: () => {
+           dispatch(toggleSidebar())
+        }
+    }
+}
+  
+const mapStateToProps = state => {
+return state.layout
+}
+  
+const LayoutConnected = withRouter(
+    connect(mapStateToProps,mapDispatchToProps)(Layout)
+)
+  
+export default LayoutConnected

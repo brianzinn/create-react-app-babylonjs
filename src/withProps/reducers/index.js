@@ -13,23 +13,21 @@ const initialState = {
   lightsDim: false
 };
 
-const sample = (state = initialState, action) => {
+const withPropsReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_ROTATION':
-      console.log('toggle rotation', action);
       return {
         ...state,
         clockwise: action.clockwise
       }
     case 'TOGGLE_LIGHTS':
-      console.log('toggle lights:', action);
       return {
         ...state,
         lightsDim: !action.full
       }
-    default:
+    default: // never
       return state
   }
 }
   
-export default sample;
+export default withPropsReducer;

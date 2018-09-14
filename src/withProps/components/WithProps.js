@@ -8,7 +8,7 @@ import Switch from "react-switch";
 
 import { toggleLights, toggleRotation } from '../reducers';
 
-class WithProps extends Component 
+class WithProps extends Component
 {
   handleClockwiseChange = (clockwise) => {
     this.props.onToggleRotation(clockwise);
@@ -56,7 +56,7 @@ class WithProps extends Component
               <HemisphericLight name="light1" intensity={this.props.lightsDim ? 0.3 : 0.7} direction={Vector3.Up()} />
               <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
                 <RotateMeshBehavior radians={this.props.clockwise ? 0.01 : -0.01} axis={Axis.Y} />
-                <StandardMaterial diffuseColor={Color3.Red()} specularColor={Color3.Black()} />
+                <StandardMaterial diffuseColor={Color3.Yellow()} specularColor={Color3.Black()} />
               </Box>
             </Scene>
           </div>
