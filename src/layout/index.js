@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-
+import { NavLink } from 'react-router-dom'
 import { Navbar, Nav, NavItem } from 'reactstrap';
-
 import Octicon, { Home, TriangleRight, MarkGithub } from '@githubprimer/octicons-react'
-
-import {
-    NavLink
-} from 'react-router-dom'
 
 import './layout.css'
 
@@ -31,16 +26,16 @@ class Layout extends Component {
 
         if (isToggled) {
             if (el.classList) {
-            el.classList.remove(className)
+                el.classList.remove(className)
             } else {
-            var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
-            el.className = el.className.replace(reg, ' ')
+                var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+                el.className = el.className.replace(reg, ' ')
             }
         } else {
             if (el.classList) {
-            el.classList.add(className)
+                el.classList.add(className)
             } else {
-            el.className += ' ' + className
+                el.className += ' ' + className
             }
         }
     }

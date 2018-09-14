@@ -12,14 +12,20 @@ export const history = createBrowserHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
 const store = createStore(
-    connectRouter(history)(rootReducer), // new root reducer with router state
-    compose(
-      applyMiddleware(
-        routerMiddleware(history), // for dispatching history actions
-        reduxWiretap
-        // other middleware ...
-      ),
+  connectRouter(history)(rootReducer), // new root reducer with router state
+  compose(
+    applyMiddleware(
+      routerMiddleware(history), // for dispatching history actions
+      reduxWiretap
+      // other middleware ...
     ),
-  )
+  ),
+)
+
+if (module.hot) {
+  module.hot.accept('./rootReducer', () => {
+    store.replaceReducer(connectRouter(history)(rootReducer))
+  })
+}
 
 export default store;

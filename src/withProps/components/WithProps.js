@@ -1,38 +1,26 @@
 import React, { Component } from 'react'
-import { Scene, FreeCamera, HemisphericLight, Box, RotateMeshBehavior } from 'react-babylonjs'
-import { Vector3, Axis } from 'babylonjs';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { Scene, FreeCamera, HemisphericLight, Box, RotateMeshBehavior, StandardMaterial } from 'react-babylonjs'
+import { Vector3, Axis, Color3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Switch from "react-switch";
 
-export default class WithProps extends Component 
+import { toggleLights, toggleRotation } from '../reducers';
+
+class WithProps extends Component 
 {
-  constructor() {
-    super();
-    this.state = {
-      dimmerChecked: true,
-      intensity: 0.7,
-      clockwiseChecked: true
-    };
-    this.handleDimmerChange = this.handleDimmerChange.bind(this);
-    this.handleClockwiseChange = this.handleClockwiseChange.bind(this);
+  handleClockwiseChange = (clockwise) => {
+    this.props.onToggleRotation(clockwise);
   }
 
-  handleClockwiseChange(clockwiseChecked) {
-    this.setState((state) => ({
-      ...state,
-      clockwiseChecked
-    }));
-  }
-
-  handleDimmerChange(dimmerChecked) {
-    this.setState((state) => ({
-      ...state,
-      dimmerChecked,
-      intensity: (dimmerChecked ? 0.7 : 0.2)
-    }));
+  handleDimmerChange = (full) => {
+    this.props.onToggleLights(full);
   }
 
   render() {
+    console.log(`rendering with dim: ${this.props.lightsDim} - clockwise: ${this.props.clockwise}`);
+
     return (
       <div>
         <div className="row">
@@ -41,7 +29,7 @@ export default class WithProps extends Component
               <span style={{padding: '5px'}}>Lights:</span>
               <Switch
                 onChange={this.handleDimmerChange}
-                checked={this.state.dimmerChecked}
+                checked={!this.props.lightsDim}
                 checkedIcon={<div style={{ paddingLeft: '2px', color: 'white'}}>full</div>}
                 uncheckedIcon={<div style={{ paddingLeft: '2px', color: 'white'}}>dim</div>}
                 className="react-switch"
@@ -54,7 +42,7 @@ export default class WithProps extends Component
             <span className="align-top" style={{padding: '5px'}}>Clockwise:</span>
               <Switch
                 onChange={this.handleClockwiseChange}
-                checked={this.state.clockwiseChecked}
+                checked={this.props.clockwise}
                 className="react-switch"
                 id="rotation-switch"
               />
@@ -64,10 +52,11 @@ export default class WithProps extends Component
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <Scene id="sample-canvas" touchActionNone={true}>
-              <FreeCamera name="camera1" position={new Vector3(0, 5, -10)} target={Vector3.Zero()} />
-              <HemisphericLight name="light1" intensity={this.state.intensity} direction={Vector3.Up()} />
+              <FreeCamera name="camera1" position={new Vector3(0, 5, -12)} target={Vector3.Zero()} />
+              <HemisphericLight name="light1" intensity={this.props.lightsDim ? 0.3 : 0.7} direction={Vector3.Up()} />
               <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
-                <RotateMeshBehavior radians={this.state.clockwiseChecked ? 0.01 : -0.01} axis={Axis.Y} />
+                <RotateMeshBehavior radians={this.props.clockwise ? 0.01 : -0.01} axis={Axis.Y} />
+                <StandardMaterial diffuseColor={Color3.Red()} specularColor={Color3.Black()} />
               </Box>
             </Scene>
           </div>
@@ -92,3 +81,32 @@ export default class WithProps extends Component
     )
   }
 }
+
+WithProps.propTypes = {
+  rotation: PropTypes.number.isRequired,
+  lightsDim: PropTypes.bool.isRequired,
+  onToggleLights: PropTypes.func.isRequired,
+  onToggleRotation: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onToggleLights: (full) => {
+      dispatch(toggleLights(full))
+    },
+    onToggleRotation: (clockwise) => {
+      dispatch(toggleRotation(clockwise))
+    }
+  }
+}
+
+const mapStateToProps = state => {
+  return state.withProps
+}
+
+const WithPropsConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithProps)
+
+export default WithPropsConnected

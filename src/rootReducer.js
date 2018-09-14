@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
 // import your Module reducers here and combine them
-import sample from './withProps/reducers'
+import withProps from './withProps/reducers'
 
 const rootReducer = combineReducers({
-	sample
+	withProps
 	// additional reducers go here.
 });
 

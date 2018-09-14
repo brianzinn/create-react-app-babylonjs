@@ -90,7 +90,7 @@ export default class RemixMeshMashup extends Component
           console.error('Unknown requestType:' + requestType);
           return;
       }
-     
+
       let newTotal = (requests === 0) ? results.length : this.state.results.length + results.length
       const max = 7 * 4; /* columns x rows */
 
@@ -171,7 +171,11 @@ export default class RemixMeshMashup extends Component
           </Col>
         </Row>, <Row>
           <Col xs={12}>
-            <Scene id="sample-canvas" enableOfflineSupport={false}>
+            <Scene id="sample-canvas" enableOfflineSupport={false} engineOptions={{
+              stencil: true,
+              disableWebGL2Support: false,
+              preserveDrawingBuffer: true
+            }}>
               <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
               <ArcRotateCamera target={ Vector3.Zero() } radius={4} alpha={-Math.PI / 2} beta={(Math.PI / 2)} minZ={0.001} wheelPrecision={30} />
               <GUI3DManager name="gui3d">
@@ -201,22 +205,22 @@ export default class RemixMeshMashup extends Component
               </GUI3DManager>
               <Box height={1/8 + 0.1} width={1.1} depth={0.01} position={new Vector3(0, -0.5, -2)}>
                 <StandardMaterial diffuseColor={Color3.White()} specularColor={Color3.Black()} />
-                <Plane name="dialog" width={1} height={1/8} position={new Vector3(0, -0.5, -2.008)}>
-                  <AdvancedDynamicTexture createForParentMesh={true}>
-                    <Rectangle color="#666666" height={1/8} scaleY={8}>
-                        <StackPanel isVertical={false} padding={0.05}>
-                          <InputText name="searchInputText" text={this.state.searchText} color='white' fontSize={36} width={0.8} onTextChanged={this.updateSearchTextBabylon} />
-                          <Button background="#FFAF00" width={0.2} height={0.9} cornerRadius={10} onPointerDown={this.doSearch}>
-                            <StackPanel isVertical={false} padding={0.05}>
-                              <Text text='Search' fontStyle="bold" fontSize={36} color="black" width={0.7} />
-                              <Text text={'\uf002'} fontFamily="FontAwesome" fontSize={36} color="black" width={0.3} />
-                            </StackPanel>
-                          </Button>
-                        </StackPanel>
-                    </Rectangle>
-                  </AdvancedDynamicTexture>
-                </Plane>
               </Box>
+              <Plane name="dialog" width={1} height={1/8} position={new Vector3(0, -0.5, -2.008)}>
+                <AdvancedDynamicTexture name="adt" createForParentMesh={true}>
+                  <Rectangle name="rect" color="#666666" height={1/8} scaleY={8}>
+                      <StackPanel name="sp-1" isVertical={false} padding={0.05}>
+                        <InputText name="searchInputText" text={this.state.searchText} color='white' fontSize={36} width={0.8} onTextChanged={this.updateSearchTextBabylon} />
+                        <Button name="button" background="#FFAF00" width={0.2} cornerRadius={10} onPointerDown={this.doSearch}>
+                          <StackPanel name="sp-2" isVertical={false} padding={0.05}>
+                            <Text name="search-text" text='Search' fontStyle="bold" fontSize={36} color="black" width={0.7} />
+                            <Text name="search-icon" text={'\uf002'} fontFamily="FontAwesome" fontSize={36} color="black" width={0.3} />
+                          </StackPanel>
+                        </Button>
+                      </StackPanel>
+                  </Rectangle>
+                </AdvancedDynamicTexture>
+              </Plane>
               <Plane name="keyboard" width={1} height={1/4} position={new Vector3(0, -(0.6 + 1/8), -2.1414)} rotation={new Vector3(Math.PI / 4, 0, 0)} >
                 <AdvancedDynamicTexture createForParentMesh={true}>
                   <Rectangle color="white" height={1/4} scaleY={4}>
@@ -237,7 +241,7 @@ export default class RemixMeshMashup extends Component
                     let modelLoadProgress = evt.lengthComputable ?
                       evt.loaded / evt.total :
                       evt.loaded / (this.state.model.fileSize * 0.085) /* provided fileSize is not for 'view' manifest, a bad guess often, but generally factor ~0.085 smaller  */
-
+                  
                     this.setState((prevState) => ({
                       ...prevState,
                       modelLoadProgress
