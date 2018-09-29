@@ -29,7 +29,8 @@ If you are using the 3D GUI components then you will need 'babylonjs-gui' (3.3+)
 A BabylonJS scene to your webpage in either a declarative manner or code manner (or combination).
 
 ## 100% Declarative
-Can be done purely with React Components and zero code.
+Can be done purely with React Components and zero code.  If you go this way, you can get a full HMR experience.  Note that when the lights are dimmed that the state is persisted **after** the HMR update.
+![BabylonJS HMR](https://raw.githubusercontent.com/brianzinn/react-babylonjs/master/media/react-babylonjs-hmr.gif)
 ```jsx
 <Scene id="sample-canvas">
     <FreeCamera name="camera1" position={new Vector3(0, 5, -10)} target={Vector3.Zero()} />

@@ -1008,23 +1008,23 @@ babylon@^6.17.0, babylon@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
-babylonjs-gltf2interface@3.3.0-beta.5:
-  version "3.3.0-beta.5"
-  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-3.3.0-beta.5.tgz#fe7304cf5e7ae5fc802dec04b89dc9a44bbf077a"
+babylonjs-gltf2interface@3.3.0-beta.6:
+  version "3.3.0-beta.6"
+  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-3.3.0-beta.6.tgz#3f8537f42447b25d42b6ee5936fd28893975249b"
 
-babylonjs-gui@3.3.0-beta.5:
-  version "3.3.0-beta.5"
-  resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-3.3.0-beta.5.tgz#ccb75a1a921cd6f9863e0e8a26d2b8dfd0a0487c"
+babylonjs-gui@^3.3.0-beta.6:
+  version "3.3.0-beta.6"
+  resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-3.3.0-beta.6.tgz#cfc62a6e2ee53eed217b1181e4b0377a7cbabac0"
 
-babylonjs-loaders@3.3.0-beta.5:
-  version "3.3.0-beta.5"
-  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-3.3.0-beta.5.tgz#8bfec3a1649a239fd9bf00c257c4e3105d76d6a3"
+babylonjs-loaders@^3.3.0-beta.6:
+  version "3.3.0-beta.6"
+  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-3.3.0-beta.6.tgz#dfa7c5ac5de1cfbe555e9e930867eccfaecf5e8d"
   dependencies:
-    babylonjs-gltf2interface "3.3.0-beta.5"
+    babylonjs-gltf2interface "3.3.0-beta.6"
 
-babylonjs@3.3.0-beta.5:
-  version "3.3.0-beta.5"
-  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-3.3.0-beta.5.tgz#1da63d7e09abb3dcef384bb4ee91649fd6781dd4"
+babylonjs@^3.3.0-beta.6:
+  version "3.3.0-beta.6"
+  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-3.3.0-beta.6.tgz#ff6c79b81e9172446338c87e6e4cbbaca5aaff75"
 
 balanced-match@^0.4.2:
   version "0.4.2"
@@ -5677,9 +5677,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-babylonjs@^0.4.7:
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.4.7.tgz#e2b16a3f1a3745abbe93c2ff170fcead6624bece"
+react-babylonjs@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.4.8.tgz#19290631f20ff4116279928ec9d00e661203aea4"
 
 react-dev-utils@^5.0.1:
   version "5.0.1"
@@ -5837,14 +5837,14 @@ react-transition-group@^2.3.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.4.2:
-  version "16.4.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
+react@^16.5.1:
+  version "16.5.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.5.1.tgz#8cb8e9f8cdcb4bde41c9a138bfbf907e66132372"
   dependencies:
-    fbjs "^0.8.16"
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.0"
+    prop-types "^15.6.2"
+    schedule "^0.4.0"
 
 reactstrap@^6.3.1:
   version "6.3.1"
@@ -6229,6 +6229,12 @@ sane@~1.6.0:
 sax@^1.2.1, sax@^1.2.4, sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
+
+schedule@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.4.0.tgz#fa20cfd0bfbf91c47d02272fd7096780d3170bbb"
+  dependencies:
+    object-assign "^4.1.1"
 
 schema-utils@^0.3.0:
   version "0.3.0"
