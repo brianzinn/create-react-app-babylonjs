@@ -7,8 +7,8 @@ const Home = () => (
     <p>Interesting part is the UI 2D, where a WebGL texture is dynamically updating from props - best experienced in VR mode :)</p>
 
     <p>
-    Also, full HMR experience with browser udpating while you build your application.
-    ![BabylonJS HMR](https://raw.githubusercontent.com/brianzinn/react-babylonjs/master/media/react-babylonjs-hmr.gif)
+    Also, full HMR experience with browser udpating as you update your application in the editor.
+    <img src="https://raw.githubusercontent.com/brianzinn/react-babylonjs/master/media/react-babylonjs-hmr.gif" width="90%" alt="React BabylonJS HMR" />
     </p>
     
     <p className="text-muted small">More coming soon...</p>

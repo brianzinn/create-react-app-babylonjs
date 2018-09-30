@@ -19,8 +19,6 @@ class WithProps extends Component
   }
 
   render() {
-    console.log(`rendering with dim: ${this.props.lightsDim} - clockwise: ${this.props.clockwise}`);
-
     return (
       <div>
         <div className="row">
@@ -61,16 +59,17 @@ class WithProps extends Component
             </Scene>
           </div>
           <div className="col-xs-12 col-md-6">
+            <span className="text-muted">(state from <strong>props</strong> are persisted in this example when you return on same visit)</span>
             <pre>
                 <PrismCode className="language-jsx">
 {` <Scene id="sample-canvas">
   <FreeCamera name="camera1"
     position={new Vector3(0, 5, -10)} target={Vector3.Zero()} />
-  <HemisphericLight name="light1"
-    intensity={this.state.intensity} direction={Vector3.Up()} />
+  <HemisphericLight name="light1" direction={Vector3.Up()}
+    intensity={this.props.lightsDim ? 0.3 : 0.7} />
   <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
     <RotateMeshBehavior axis={Axis.Y}
-      radians={this.state.clockwiseChecked ? 0.01 : -0.01} />
+      radians={this.props.clockwise ? 0.01 : -0.01} />
   </Box>
 </Scene>`}
                 </PrismCode>

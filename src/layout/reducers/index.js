@@ -7,7 +7,6 @@ const initialState = {
 };
 
 const layoutReducer = (state = initialState, action) => {
-  console.log('action received:', action)
   switch (action.type) {
     case 'TOGGLE_SIDEBAR':
       return {
