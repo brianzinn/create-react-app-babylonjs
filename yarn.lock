@@ -1008,25 +1008,26 @@ babylon@^6.17.0, babylon@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
-babylonjs-gltf2interface@3.3.0-rc.5:
-  version "3.3.0-rc.5"
-  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-3.3.0-rc.5.tgz#a70db2be80e761aeb82e95ad01952d7eac1efd98"
+babylonjs-gltf2interface@4.0.0-alpha.9:
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-4.0.0-alpha.9.tgz#d4cf7f537f92924468ebbe10f73a3073da53bc57"
 
-babylonjs-gui@^3.3.0-rc.5:
-  version "3.3.0-rc.5"
-  resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-3.3.0-rc.5.tgz#9179b9622409e260c03712626c7f16503ee7ecaa"
+babylonjs-gui@^4.0.0-alpha.9:
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-4.0.0-alpha.9.tgz#1c678807a98b199540ff7f41db321769029045b3"
   dependencies:
-    babylonjs "3.3.0-rc.5"
+    babylonjs "4.0.0-alpha.9"
 
-babylonjs-loaders@^3.3.0-rc.5:
-  version "3.3.0-rc.5"
-  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-3.3.0-rc.5.tgz#36cb84014975f5fbb8dd7c110e1c1df7661a06c3"
+babylonjs-loaders@^4.0.0-alpha.9:
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-4.0.0-alpha.9.tgz#5ae5794a184c79f8ed645679d555801fea7466e3"
   dependencies:
-    babylonjs-gltf2interface "3.3.0-rc.5"
+    babylonjs "4.0.0-alpha.9"
+    babylonjs-gltf2interface "4.0.0-alpha.9"
 
-babylonjs@3.3.0-rc.5, babylonjs@^3.3.0-rc.5:
-  version "3.3.0-rc.5"
-  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-3.3.0-rc.5.tgz#18da978eed55f17e4152d77cac3b3b1c4b22996e"
+babylonjs@4.0.0-alpha.9, babylonjs@^4.0.0-alpha.9:
+  version "4.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-4.0.0-alpha.9.tgz#22dbe53a17585d530257155a847cf5b66c4cf5e2"
 
 balanced-match@^0.4.2:
   version "0.4.2"
@@ -5679,9 +5680,11 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-babylonjs@^0.4.9:
-  version "0.4.9"
-  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-0.4.9.tgz#b17d1bfb42eb2afab5a013771639e466e7e6665c"
+react-babylonjs@^1.0.0-beta.2:
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-1.0.0-beta.2.tgz#607013c9d2c6002c58e0f30b4c28dc11494786da"
+  dependencies:
+    react-reconciler "^0.17.0"
 
 react-dev-utils@^5.0.1:
   version "5.0.1"
@@ -5744,6 +5747,15 @@ react-popper@^0.10.4:
 react-prism@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/react-prism/-/react-prism-4.3.2.tgz#5c07609539b3ba6f45eb33e7d6a3588df3270c21"
+
+react-reconciler@^0.17.0:
+  version "0.17.2"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.17.2.tgz#cabe8cb403793f6462842e07b525c3b61c4f5cde"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.11.2"
 
 react-redux@^5.0.7:
   version "5.0.7"
@@ -6236,6 +6248,13 @@ schedule@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.4.0.tgz#fa20cfd0bfbf91c47d02272fd7096780d3170bbb"
   dependencies:
+    object-assign "^4.1.1"
+
+scheduler@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.2.tgz#a8db5399d06eba5abac51b705b7151d2319d33d3"
+  dependencies:
+    loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
 schema-utils@^0.3.0:

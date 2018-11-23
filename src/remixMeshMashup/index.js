@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Button as ReactStrapButton, Row, Col, Input, FormGroup, Label, Form } from 'reactstrap';
-import { Scene, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, VRExperience, Button3D, StandardMaterial,
-  Plane, AdvancedDynamicTexture, Rectangle, StackPanel, InputText, Text, Box, Button, Environment, VirtualKeyboard, Model } from 'react-babylonjs';
+import { Engine, Scene, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, VRExperienceHelper, Button3D, StandardMaterial,
+  Plane, AdvancedDynamicTexture, Rectangle, StackPanel, InputText, TextBlock, Box, Button, EnvironmentHelper, VirtualKeyboard, Model } from 'react-babylonjs';
 import { Vector3, Color3, Matrix, Tools } from 'babylonjs';
 import { Control } from 'babylonjs-gui'
 import Octicon, { Search } from '@githubprimer/octicons-react';
+import MashupButton from './MashupButton'
 
 export default class RemixMeshMashup extends Component 
 {
@@ -176,95 +177,89 @@ export default class RemixMeshMashup extends Component
           </Col>
         </Row>, <Row key="exampleRow">
           <Col xs={12}>
-            <Scene id="sample-canvas" enableOfflineSupport={false} engineOptions={{
-              stencil: true,
-              disableWebGL2Support: false,
-              preserveDrawingBuffer: true
-            }}>
-              <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
-              <ArcRotateCamera target={ Vector3.Zero() } radius={4} alpha={-Math.PI / 2} beta={(Math.PI / 2)} minZ={0.001} wheelPrecision={30} />
-              <GUI3DManager name="gui3d">
-                <CylinderPanel name="panel" margin={0.2} rows={4} radius={4} position={new Vector3(0, 2, 0)}>
-                {
-                  this.state.results.map(result => {
-                    if (result.type === 'board' || result.type === 'creation') {
-                      var buttonText = result.item.name + (result.item.hasAnimations ? ' *' : '');
-                      var fontSize = buttonText.length <= 12 ? 36 : (buttonText.length <= 20 ? 24 : 20); // TODO: ctx.measureText(...)
-                      return (
-                        <Button3D key={result.item.id} name={result.item.name} imageUrl={result.item.previewImage.source}
-                          text={buttonText} fontColor={Color3.Black()} fontSize={fontSize}
-                          diffuseColor={Color3.Black()} hoverEmmissiveColor={Color3.FromInts(15, 15, 15)}
-                          onClick={() => {
-                            if(result.type === 'board') {
-                              this.getItems(`https://api.remix3d.com/v3/boards/${result.item.id}`, 'boards', this.state.headers)
-                            } else if (result.type === 'creation') {
-                              this.loadCreation(result.item)
-                            }
-                          }}
-                        />
-                      )
-                    } else {
-                      return null;
-                    }
-                  })
+            <Engine canvasId="sample-canvas" engineOptions={{ stencil: true, preserveDrawingBuffer: true }}>
+              <Scene>
+                <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
+                <ArcRotateCamera target={ Vector3.Zero() } radius={4} alpha={-Math.PI / 2} beta={(Math.PI / 2)} minZ={0.001} wheelPrecision={30} />
+                <GUI3DManager name="gui3d">
+                  <CylinderPanel name="panel" margin={0.2} rows={4} radius={4} position={new Vector3(0, 2, 0)}>
+                  {
+                    this.state.results.map(result => {
+                      if (result.type === 'board' || result.type === 'creation') {
+                        var buttonText = result.item.name + (result.item.hasAnimations ? ' *' : '');
+                        var fontSize = buttonText.length <= 12 ? 36 : (buttonText.length <= 20 ? 24 : 20); // TODO: ctx.measureText(...)
+                        return (
+                          <MashupButton key={result.item.id} name={result.item.name} imageUrl={result.item.previewImage.source}
+                            text={buttonText} fontColor="black" fontSize={fontSize}
+                            onPointerDown={() => {
+                              if(result.type === 'board') {
+                                this.getItems(`https://api.remix3d.com/v3/boards/${result.item.id}`, 'boards', this.state.headers)
+                              } else if (result.type === 'creation') {
+                                this.loadCreation(result.item)
+                              }
+                            }}
+                          />
+                        )
+                      } else {
+                        return null;
+                      }
+                    })
+                  }
+                  </CylinderPanel>
+                </GUI3DManager>
+                <Box height={1/8 + 0.1} width={1.1} depth={0.01} position={new Vector3(0, -0.5, -2)}>
+                  <StandardMaterial diffuseColor={Color3.White()} specularColor={Color3.Black()} />
+                </Box>
+                <Plane name="dialog" width={1} height={1/8} position={new Vector3(0, -0.5, -2.008)}>
+                  <AdvancedDynamicTexture name="adt" height={1024} width={1024} forParentMesh={true}>
+                    <Rectangle name="rect" color="#666666" height={1/8} scaleY={8}>
+                        <StackPanel name="sp-1" isVertical={false} padding={0.05}>
+                          <InputText name="searchInputText" text={this.state.searchText} color='white' fontSize={36} width={0.8} onTextChanged={this.updateSearchTextBabylon} />
+                          <Button name="button" background="#FFAF00" width={0.2} cornerRadius={10} onPointerDown={this.doSearch}>
+                            <StackPanel name="sp-2" isVertical={false} padding={0.05}>
+                              <TextBlock key="search-text" name="search-text" text='Search' fontStyle="bold" fontSize={36} color="black" width={0.7} />
+                              <TextBlock key="search-icon" name="search-icon" text={'\uf002'} fontFamily="FontAwesome" fontSize={36} color="black" width={0.3} />
+                            </StackPanel>
+                          </Button>
+                        </StackPanel>
+                    </Rectangle>
+                  </AdvancedDynamicTexture>
+                </Plane>
+                <Plane name="keyboard" width={1} height={1/4} position={new Vector3(0, -(0.6 + 1/8), -2.1414)} rotation={new Vector3(Math.PI / 4, 0, 0)} >
+                  <AdvancedDynamicTexture height={1024} width={1024} forParentMesh={true} onlyAlphaTesting={true}>
+                    <Rectangle color="white" height={1/4} scaleY={4}>
+                      <VirtualKeyboard connectControlNames={['searchInputText']} defaultKeyboard={true} disableOffFocus={true} verticalAlignment={ Control.VERTICAL_ALIGNMENT_TOP } />
+                    </Rectangle>
+                  </AdvancedDynamicTexture>
+                </Plane>
+                {this.state.model &&
+                  <Model key={this.state.model.key} rootUrl={this.state.model.rootUrl} sceneFilename={this.state.model.sceneFilename} position={new Vector3(0, -0.5, 0)}
+                    pluginExtension={this.state.model.fileExtension} scaleToDimension={2} rotation={new Vector3(0, this.state.model.yRotation, 0)}
+                    onModelLoaded={() => {
+                      this.setState((prevState) => ({
+                        ...prevState,
+                        modelLoadProgress: 1 /* final progress event not received when lengthComputable = false */
+                      }))
+                    }}
+                    onLoadProgress={(evt) => {
+                      let modelLoadProgress = evt.lengthComputable ?
+                        evt.loaded / evt.total :
+                        evt.loaded / (this.state.model.fileSize * 0.085) /* provided fileSize is not for 'view' manifest, a bad guess often, but generally factor ~0.085 smaller  */
+                    
+                      this.setState((prevState) => ({ ...prevState, modelLoadProgress }))
+                    }}
+                  />
                 }
-                </CylinderPanel>
-              </GUI3DManager>
-              <Box height={1/8 + 0.1} width={1.1} depth={0.01} position={new Vector3(0, -0.5, -2)}>
-                <StandardMaterial diffuseColor={Color3.White()} specularColor={Color3.Black()} />
-              </Box>
-              <Plane name="dialog" width={1} height={1/8} position={new Vector3(0, -0.5, -2.008)}>
-                <AdvancedDynamicTexture name="adt" createForParentMesh={true}>
-                  <Rectangle name="rect" color="#666666" height={1/8} scaleY={8}>
-                      <StackPanel name="sp-1" isVertical={false} padding={0.05}>
-                        <InputText name="searchInputText" text={this.state.searchText} color='white' fontSize={36} width={0.8} onTextChanged={this.updateSearchTextBabylon} />
-                        <Button name="button" background="#FFAF00" width={0.2} cornerRadius={10} onPointerDown={this.doSearch}>
-                          <StackPanel name="sp-2" isVertical={false} padding={0.05}>
-                            <Text key="search-text" name="search-text" text='Search' fontStyle="bold" fontSize={36} color="black" width={0.7} />
-                            <Text key="search-icon" name="search-icon" text={'\uf002'} fontFamily="FontAwesome" fontSize={36} color="black" width={0.3} />
-                          </StackPanel>
-                        </Button>
-                      </StackPanel>
-                  </Rectangle>
-                </AdvancedDynamicTexture>
-              </Plane>
-              <Plane name="keyboard" width={1} height={1/4} position={new Vector3(0, -(0.6 + 1/8), -2.1414)} rotation={new Vector3(Math.PI / 4, 0, 0)} >
-                <AdvancedDynamicTexture createForParentMesh={true}>
-                  <Rectangle color="white" height={1/4} scaleY={4}>
-                    <VirtualKeyboard controlNames={['searchInputText']} disableOffFocus={true} verticalAlignment={ Control.VERTICAL_ALIGNMENT_TOP } />
-                  </Rectangle>
-                </AdvancedDynamicTexture>
-              </Plane>
-              {this.state.model &&
-                <Model key={this.state.model.key} rootUrl={this.state.model.rootUrl} sceneFilename={this.state.model.sceneFilename} position={new Vector3(0, -0.5, 0)}
-                  pluginExtension={this.state.model.fileExtension} scaleToDimension={2} rotation={new Vector3(0, this.state.model.yRotation, 0)}
-                  onModelLoaded={() => {
-                    this.setState((prevState) => ({
-                      ...prevState,
-                      modelLoadProgress: 1 /* final progress event not received when lengthComputable = false */
-                    }))
-                  }}
-                  onLoadProgress={(evt) => {
-                    let modelLoadProgress = evt.lengthComputable ?
-                      evt.loaded / evt.total :
-                      evt.loaded / (this.state.model.fileSize * 0.085) /* provided fileSize is not for 'view' manifest, a bad guess often, but generally factor ~0.085 smaller  */
-                  
-                    this.setState((prevState) => ({
-                      ...prevState,
-                      modelLoadProgress
-                    }))
-                  }}
-                />
-              }
-              <Box key="progressBar" height={0.2} width={3} depth={0.1} position={new Vector3(-1.5, 0, 0)} visibility={this.state.modelLoadProgress === 1 ? 0 : 0.6}
-                  scaling = { new Vector3(this.state.modelLoadProgress, 1, 1) }
-                  pivotMatrix={ Matrix.Translation(3, 0, 0) } preTransformMatrix={ Matrix.Translation(3 / 2, 0, 0) }>
-                  <StandardMaterial diffuseColor={Color3.FromInts(255, 165, 0)} specularColor={Color3.Black()} />
-              </Box>              
-              <Box key="progressBack" height={0.2} width={3} depth={0.1} position={new Vector3(0, 0, 0.1)} visibility={this.state.modelLoadProgress === 1 ? 0 : 1} />
-              <VRExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} enableInteractions={true} />
-              <Environment enableGroundShadow={true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
-            </Scene>
+                <Box key="progressBar" height={0.2} width={3} depth={0.1} position={new Vector3(-1.5, 0, 0)} visibility={this.state.modelLoadProgress === 1 ? 0 : 0.6}
+                    scaling = { new Vector3(this.state.modelLoadProgress, 1, 1) }
+                    pivotMatrix={ Matrix.Translation(3, 0, 0) } preTransformMatrix={ Matrix.Translation(3 / 2, 0, 0) }>
+                    <StandardMaterial diffuseColor={Color3.FromInts(255, 165, 0)} specularColor={Color3.Black()} />
+                </Box>              
+                <Box key="progressBack" height={0.2} width={3} depth={0.1} position={new Vector3(0, 0, 0.1)} visibility={this.state.modelLoadProgress === 1 ? 0 : 1} />
+                <VRExperienceHelper webVROptions={{createDeviceOrientationCamera: false}} teleportEnvironmentGround={true} enableInteractions={true} />
+                <EnvironmentHelper enableGroundShadow={true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
+              </Scene>
+            </Engine>
           </Col>
         </Row>]
     )

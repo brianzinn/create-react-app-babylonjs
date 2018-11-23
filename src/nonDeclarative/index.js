@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Scene } from 'react-babylonjs'
+import { Engine, Scene } from 'react-babylonjs'
 import { Vector3, ArcRotateCamera, MeshBuilder, HemisphericLight } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 
@@ -38,7 +38,9 @@ render() {
       </div>
       <div className="row">
         <div className="col-xs-12 col-md-6">
-          <Scene id="sample-canvas" onMeshPicked={this.meshPicked} onSceneMount={this.onSceneMount} />
+          <Engine canvasId="sample-canvas">
+            <Scene onMeshPicked={this.meshPicked} onSceneMount={this.onSceneMount} />
+          </Engine>
         </div>
         <div className="col-xs-12 col-md-6">
           <pre>
@@ -75,11 +77,10 @@ export default class NonDeclarative extends Component
 
 render() {
   return (
-    <Scene
-      onMeshPicked={this.onMeshPicked}
-      onSceneMount={this.onSceneMount}
-    />)
-  }
+    <Engine>
+      <Scene onMeshPicked={this.onMeshPicked} onSceneMount={this.onSceneMount} />
+    </Engine>
+  )}
 }`}
                 </PrismCode>
               </pre>

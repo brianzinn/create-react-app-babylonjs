@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Scene, FreeCamera, HemisphericLight, Box, RotateMeshBehavior, StandardMaterial } from 'react-babylonjs'
+import { Engine, Scene, FreeCamera, HemisphericLight, Box, StandardMaterial } from 'react-babylonjs'
 import { Vector3, Axis, Color3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Switch from "react-switch";
 
 import { toggleLights, toggleRotation } from '../reducers';
+import SingleAxisRotateMeshBehavior from '../../SingleAxisRotateMeshBehavior'
 
 class WithProps extends Component
 {
@@ -46,20 +47,24 @@ class WithProps extends Component
               />
             </label>
           </div>
+          <div className="col-xs-6">
+            <span className="text-muted">[<strong>props</strong> are persisted in this example when you return on same visit (or HMR))]</span>
+          </div>
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <Scene id="sample-canvas" touchActionNone={true}>
-              <FreeCamera name="camera1" position={new Vector3(0, 5, -12)} target={Vector3.Zero()} />
-              <HemisphericLight name="light1" intensity={this.props.lightsDim ? 0.3 : 0.7} direction={Vector3.Up()} />
-              <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
-                <RotateMeshBehavior radians={this.props.clockwise ? 0.01 : -0.01} axis={Axis.Y} />
-                <StandardMaterial diffuseColor={Color3.Yellow()} specularColor={Color3.Black()} />
-              </Box>
-            </Scene>
+            <Engine canvasId="sample-canvas">
+              <Scene>
+                <FreeCamera name="camera1" position={new Vector3(0, 5, -12)} setTarget={{target: new Vector3(0, 1, 0)}} />
+                <HemisphericLight name="light1" intensity={this.props.lightsDim ? 0.3 : 0.7} direction={Vector3.Up()} />
+                <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
+                  <SingleAxisRotateMeshBehavior rpm={this.props.clockwise ? 12 : -12 } axis={Axis.Y} />
+                  <StandardMaterial name="mat1" diffuseColor={Color3.Yellow()} specularColor={Color3.Black()} />
+                </Box>
+              </Scene>
+            </Engine>
           </div>
           <div className="col-xs-12 col-md-6">
-            <span className="text-muted">(state from <strong>props</strong> are persisted in this example when you return on same visit)</span>
             <pre>
                 <PrismCode className="language-jsx">
 {` <Scene id="sample-canvas">
@@ -68,8 +73,9 @@ class WithProps extends Component
   <HemisphericLight name="light1" direction={Vector3.Up()}
     intensity={this.props.lightsDim ? 0.3 : 0.7} />
   <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
-    <RotateMeshBehavior axis={Axis.Y}
-      radians={this.props.clockwise ? 0.01 : -0.01} />
+    <StandardMaterial name="yellow-mat"
+      diffuseColor={Color3.Yellow()} specularColor={Color3.Black()} />
+    <RotateMeshBehavior rpm={this.props.clockwise ? 12 : -12 } axis={Axis.Y} />
   </Box>
 </Scene>`}
                 </PrismCode>
@@ -82,7 +88,7 @@ class WithProps extends Component
 }
 
 WithProps.propTypes = {
-  rotation: PropTypes.number.isRequired,
+  clockwise: PropTypes.bool.isRequired,
   lightsDim: PropTypes.bool.isRequired,
   onToggleLights: PropTypes.func.isRequired,
   onToggleRotation: PropTypes.func.isRequired

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import {
-  Scene, Skybox, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, HolographicButton, VRExperience
+  Engine, Scene, Skybox, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, HolographicButton, VRExperience
 } from 'react-babylonjs';
 import { Vector3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
@@ -13,7 +13,7 @@ export default class WithSkybox extends Component
     super();
     
     this.state = {
-      skyboxIndex: 0
+      skyboxIndex: 1
     }
 
     this.skyboxScenes = [{
@@ -43,9 +43,7 @@ export default class WithSkybox extends Component
   }
 
   render() {
-
     const activeSkybox = this.skyboxScenes[this.state.skyboxIndex % this.skyboxScenes.length];
-
     return (
       <div>
         <div className="row">
@@ -58,30 +56,31 @@ export default class WithSkybox extends Component
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <Scene id="sample-canvas">
-              <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
-              <Skybox texture={activeSkybox.texture} />
-              <ArcRotateCamera target={ Vector3.Zero() } radius={10}
-                alpha={-Math.PI / 2} beta={(Math.PI / 2)}
-              />
-              <GUI3DManager name="gui3d">
-                <CylinderPanel name="panel" margin={0.2}>
-                  {
-                    Array.from(new Array(60), (_, index) => index).map(number => {
-                      return (
-                        <HolographicButton
-                          key={`btn-${number}`}
-                          name={`btn-name-${number}`}
-                          text={`btn-text-${number}`}
-                          onClick={this.next}
-                        />
-                      )
-                    })
-                  }
-                </CylinderPanel>
-              </GUI3DManager>
-              <VRExperience createDeviceOrientationCamera={false} />
-            </Scene>
+            <Engine canvasId="sample-canvas">
+              <Scene>
+                <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
+                <Skybox rootUrl={activeSkybox.texture} />
+                <ArcRotateCamera target={ Vector3.Zero() } radius={10}
+                  alpha={-Math.PI / 2} beta={(Math.PI / 2)} minZ={0.001} wheelPrecision={30}
+                />
+                <GUI3DManager name="gui3d">
+                  <CylinderPanel name="panel" margin={0.2}>
+                    {
+                      Array.from(new Array(50), (_, index) => index).map(number => {
+                        return (
+                          <HolographicButton
+                            key={`btn-${number}`}
+                            name={`btn-name-${number}`}
+                            text={`btn-text-${number}`}
+                            onPointerClickObservable={this.next}
+                          />
+                        )
+                      })
+                    }
+                  </CylinderPanel>
+                </GUI3DManager>
+              </Scene>
+            </Engine>
           </div>
           <div className="col-xs-12 col-md-6">
             <pre>
