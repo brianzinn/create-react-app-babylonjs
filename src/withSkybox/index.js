@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import {
-  Engine, Scene, Skybox, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, HolographicButton, VRExperience
+  Engine, Scene, Skybox, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, HolographicButton
 } from 'react-babylonjs';
 import { Vector3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';

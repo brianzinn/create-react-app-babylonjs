@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button as ReactStrapButton, Row, Col, Input, FormGroup, Label, Form } from 'reactstrap';
-import { Engine, Scene, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, VRExperienceHelper, Button3D, StandardMaterial,
+import { Engine, Scene, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, VRExperienceHelper, Mesh, StandardMaterial,
   Plane, AdvancedDynamicTexture, Rectangle, StackPanel, InputText, TextBlock, Box, Button, EnvironmentHelper, VirtualKeyboard, Model } from 'react-babylonjs';
 import { Vector3, Color3, Matrix, Tools } from 'babylonjs';
 import { Control } from 'babylonjs-gui'
@@ -181,8 +181,9 @@ export default class RemixMeshMashup extends Component
               <Scene>
                 <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
                 <ArcRotateCamera target={ Vector3.Zero() } radius={4} alpha={-Math.PI / 2} beta={(Math.PI / 2)} minZ={0.001} wheelPrecision={30} />
+                <Mesh name="panelAnchor" position={new Vector3(0, 2, 0)} />
                 <GUI3DManager name="gui3d">
-                  <CylinderPanel name="panel" margin={0.2} rows={4} radius={4} position={new Vector3(0, 2, 0)}>
+                  <CylinderPanel name="panel" margin={0.2} rows={4} radius={4} linkToTransformNodeByName="panelAnchor">
                   {
                     this.state.results.map(result => {
                       if (result.type === 'board' || result.type === 'creation') {

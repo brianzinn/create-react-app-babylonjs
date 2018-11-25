@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Button3D, TextBlock, StackPanel, Image, withScene } from 'react-babylonjs'
 import { Color3 } from 'babylonjs'
 
