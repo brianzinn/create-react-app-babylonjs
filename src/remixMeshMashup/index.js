@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Button as ReactStrapButton, Row, Col, Input, FormGroup, Label, Form } from 'reactstrap';
 import { Engine, Scene, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, VRExperienceHelper, Mesh, StandardMaterial,
-  Plane, AdvancedDynamicTexture, Rectangle, StackPanel, InputText, TextBlock, Box, Button, EnvironmentHelper, VirtualKeyboard, Model } from 'react-babylonjs';
-import { Vector3, Color3, Matrix, Tools } from 'babylonjs';
+  Plane, AdvancedDynamicTexture, Rectangle, StackPanel, InputText, TextBlock, Box, Button, EnvironmentHelper, VirtualKeyboard } from 'react-babylonjs';
+import { Vector3, Color3 } from 'babylonjs';
 import { Control } from 'babylonjs-gui'
 import Octicon, { Search } from '@githubprimer/octicons-react';
 import MashupButton from './MashupButton'
+import ScaledModelWithProgress from '../ScaledModelWithProgress'
 
 export default class RemixMeshMashup extends Component 
 {
@@ -98,7 +99,7 @@ export default class RemixMeshMashup extends Component
       }
 
       let newTotal = (requests === 0) ? results.length : this.state.results.length + results.length
-      const max = 15 * 4; /* columns x rows */
+      const max = 15 * 2; /* columns x rows */
 
       this.setState((prevState) => ({
         ...prevState,
@@ -123,9 +124,11 @@ export default class RemixMeshMashup extends Component
     var filenameIndex = uri.lastIndexOf("/");
 
     const viewerStagingData = creation.stagingData ? creation.stagingData.viewerStagingData : undefined;
-    const modelYRotation = viewerStagingData && viewerStagingData['Model.RotationOffsetAxisY'] && viewerStagingData['Model.RotationOffsetAngle']
-      ? viewerStagingData['Model.RotationOffsetAxisY'] * Tools.ToRadians(viewerStagingData['Model.RotationOffsetAngle'])
-      : 0;
+    
+    // viewerStagingData['Model.RotationOffsetAxisY'] * Tools.ToRadians(viewerStagingData['Model.RotationOffsetAngle'])
+    const modelYRotation = viewerStagingData && viewerStagingData['Camera.State.Rotation.Y']
+      ? viewerStagingData['Camera.State.Rotation.Y'] + Math.PI
+      : Math.PI;
 
     this.setState((prevState) => ({
       ...prevState,
@@ -183,7 +186,7 @@ export default class RemixMeshMashup extends Component
                 <ArcRotateCamera target={ Vector3.Zero() } radius={4} alpha={-Math.PI / 2} beta={(Math.PI / 2)} minZ={0.001} wheelPrecision={30} />
                 <Mesh name="panelAnchor" position={new Vector3(0, 2, 0)} />
                 <GUI3DManager name="gui3d">
-                  <CylinderPanel name="panel" margin={0.2} rows={4} radius={4} linkToTransformNodeByName="panelAnchor">
+                  <CylinderPanel name="panel" margin={0.2} rows={2} radius={4} linkToTransformNodeByName="panelAnchor">
                   {
                     this.state.results.map(result => {
                       if (result.type === 'board' || result.type === 'creation') {
@@ -212,7 +215,7 @@ export default class RemixMeshMashup extends Component
                   <StandardMaterial diffuseColor={Color3.White()} specularColor={Color3.Black()} />
                 </Box>
                 <Plane name="dialog" width={1} height={1/8} position={new Vector3(0, -0.5, -2.008)}>
-                  <AdvancedDynamicTexture name="adt" height={1024} width={1024} forParentMesh={true}>
+                  <AdvancedDynamicTexture name="adt" height={1024} width={1024} createForParentMesh={true}>
                     <Rectangle name="rect" color="#666666" height={1/8} scaleY={8}>
                         <StackPanel name="sp-1" isVertical={false} padding={0.05}>
                           <InputText name="searchInputText" text={this.state.searchText} color='white' fontSize={36} width={0.8} onTextChanged={this.updateSearchTextBabylon} />
@@ -227,36 +230,21 @@ export default class RemixMeshMashup extends Component
                   </AdvancedDynamicTexture>
                 </Plane>
                 <Plane name="keyboard" width={1} height={1/4} position={new Vector3(0, -(0.6 + 1/8), -2.1414)} rotation={new Vector3(Math.PI / 4, 0, 0)} >
-                  <AdvancedDynamicTexture height={1024} width={1024} forParentMesh={true} onlyAlphaTesting={true}>
+                  <AdvancedDynamicTexture height={1024} width={1024} createForParentMesh={true} onlyAlphaTesting={true}>
                     <Rectangle color="white" height={1/4} scaleY={4}>
                       <VirtualKeyboard connectControlNames={['searchInputText']} defaultKeyboard={true} disableOffFocus={true} verticalAlignment={ Control.VERTICAL_ALIGNMENT_TOP } />
                     </Rectangle>
                   </AdvancedDynamicTexture>
                 </Plane>
                 {this.state.model &&
-                  <Model key={this.state.model.key} rootUrl={this.state.model.rootUrl} sceneFilename={this.state.model.sceneFilename} position={new Vector3(0, -0.5, 0)}
-                    pluginExtension={this.state.model.fileExtension} scaleToDimension={2} rotation={new Vector3(0, this.state.model.yRotation, 0)}
-                    onModelLoaded={() => {
-                      this.setState((prevState) => ({
-                        ...prevState,
-                        modelLoadProgress: 1 /* final progress event not received when lengthComputable = false */
-                      }))
-                    }}
-                    onLoadProgress={(evt) => {
-                      let modelLoadProgress = evt.lengthComputable ?
-                        evt.loaded / evt.total :
-                        evt.loaded / (this.state.model.fileSize * 0.085) /* provided fileSize is not for 'view' manifest, a bad guess often, but generally factor ~0.085 smaller  */
-                    
-                      this.setState((prevState) => ({ ...prevState, modelLoadProgress }))
-                    }}
+                  <ScaledModelWithProgress key={this.state.model.key} rootUrl={this.state.model.rootUrl} sceneFilename={this.state.model.sceneFilename} scaleTo={2} 
+                    progressBarColor={Color3.FromInts(255, 165, 0)} center={new Vector3(0, 0, 0)}
+                    pluginExtension={this.state.model.fileExtension}
+                    modelRotation={new Vector3(0, this.state.model.yRotation, 0)} progressRotation={new Vector3(0, Math.PI, 0)}
+                    estimatedFileSize={this.state.model.fileSize * 0.85}
                   />
                 }
-                <Box key="progressBar" height={0.2} width={3} depth={0.1} position={new Vector3(-1.5, 0, 0)} visibility={this.state.modelLoadProgress === 1 ? 0 : 0.6}
-                    scaling = { new Vector3(this.state.modelLoadProgress, 1, 1) }
-                    pivotMatrix={ Matrix.Translation(3, 0, 0) } preTransformMatrix={ Matrix.Translation(3 / 2, 0, 0) }>
-                    <StandardMaterial diffuseColor={Color3.FromInts(255, 165, 0)} specularColor={Color3.Black()} />
-                </Box>              
-                <Box key="progressBack" height={0.2} width={3} depth={0.1} position={new Vector3(0, 0, 0.1)} visibility={this.state.modelLoadProgress === 1 ? 0 : 1} />
+
                 <VRExperienceHelper webVROptions={{createDeviceOrientationCamera: false}} teleportEnvironmentGround={true} enableInteractions={true} />
                 <EnvironmentHelper enableGroundShadow={true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
               </Scene>

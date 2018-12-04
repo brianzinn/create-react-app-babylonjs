@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
-import { Engine, Scene, ArcRotateCamera, HemisphericLight, Model, Box, StandardMaterial } from 'react-babylonjs'
-import { Vector3, Matrix, Color3 } from 'babylonjs';
+import { Engine, Scene, ArcRotateCamera, HemisphericLight } from 'react-babylonjs'
+import { Vector3, Color3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowDown, ArrowUp} from '@githubprimer/octicons-react'
+import ScaledModelWithProgress from '../ScaledModelWithProgress'
 
 // import './WithModel.css'
 
@@ -14,9 +15,7 @@ class WithModel extends Component
     
     this.state = {
       avocadoYPos: -1.5,
-      avocadoScaling: 3.0,
-      boomBoxLoadProgress: 0.0,
-      avocadoLoadProgress: 0.0
+      avocadoScaling: 3.0
     }
 
     this.moveAvocadoUp = this.moveAvocadoUp.bind(this);
@@ -77,47 +76,11 @@ class WithModel extends Component
               <Scene>
                 <ArcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2} radius={9.0} target={Vector3.Zero()} minZ={0.001} />
                 <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
-                <Model
-                  scaleToDimension={3}
-                  onLoadProgress={(evt) => {
-                    if (evt.lengthComputable) {
-                      let boomBoxLoadProgress = evt.loaded / evt.total
-                      this.setState((prevState) => ({
-                        ...prevState,
-                        boomBoxLoadProgress
-                      }))
-                    }
-                  }}
-                  position={ new Vector3(2.5, 0, 0)}
-                  rootUrl = {`${baseUrl}BoomBox/glTF/`}
-                  sceneFilename="BoomBox.gltf"
-                />
                 
-                {this.state.boomBoxLoadProgress < 1 &&
-                  [<Box key="progress1" name="box" height={0.2} width={3} depth={0.1} position={new Vector3(4, 0, 2.1)}
-                    scaling = { new Vector3(this.state.boomBoxLoadProgress, 1, 1) }
-                    pivotMatrix={ Matrix.Translation(-3, 0, 0) }
-                    preTransformMatrix={ Matrix.Translation(-3 / 2, 0, 0) }>
-                    <StandardMaterial
-                      diffuseColor={Color3.FromInts(255, 165, 0)}
-                      specularColor={Color3.Black()}
-                    />
-                  </Box>,              
-                  <Box key="back1" name="box" height={0.2} width={3} depth={0.1} position={new Vector3(2.5, 0, 2.0)} />
-                  ]
-                }
-                
-                <Model
-                  position={ new Vector3(-3.0, this.state.avocadoYPos, 0)}
-                  rootUrl={`${baseUrl}Avocado/glTF/`}
-                  sceneFilename="Avocado.gltf"
-                  onLoadProgress={(evt) => {
-                    if (!evt.lengthComputable) {
-                      console.log('length is not computable - no progress updates:', evt)
-                    }
-                  }}
-                  scaleToDimension = {this.state.avocadoScaling}
-                />              
+                <ScaledModelWithProgress rootUrl={`${baseUrl}BoomBox/glTF/`} sceneFilename="BoomBox.gltf" scaleTo={3} 
+                  progressBarColor={Color3.FromInts(255, 165, 0)} center={new Vector3(2.5, 0, 0)} />
+                <ScaledModelWithProgress rootUrl={`${baseUrl}Avocado/glTF/`} sceneFilename="Avocado.gltf" scaleTo={this.state.avocadoScaling} 
+                  progressBarColor={Color3.FromInts(255, 165, 0)} center={new Vector3(-2.5, this.state.avocadoYPos, 0)} />
               </Scene>
             </Engine>
           </div>

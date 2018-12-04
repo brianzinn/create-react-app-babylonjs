@@ -5,7 +5,6 @@ import {
 } from 'react-babylonjs'
 
 import { Vector3, Color3, Animation, ExponentialEase, EasingFunction } from 'babylonjs';
-import { PrismCode } from 'react-prism';
 
 export default class With2DUI extends Component 
 {
@@ -135,7 +134,7 @@ export default class With2DUI extends Component
           </div>
         </div>
         <div className="row">
-          <div className="col-xs-12 col-md-6">
+          <div className="col-xs-12 col-md-12">
             <Engine canvasId="sample-canvas">
               <Scene onMeshPicked={this.meshPicked}>
                 <ArcRotateCamera name="camera1" radius={7} beta={Math.PI / 4} alpha={Math.PI / 2} target={Vector3.Zero()} minZ={0.001} wheelPrecision={30}
@@ -163,7 +162,7 @@ export default class With2DUI extends Component
                 </Box>
                   {this.state.showModal === true &&
                     <Plane name="dialog" width={3} height={3* (dialogHeight/dialogWidth)} onCreated={this.setPlane}>
-                      <AdvancedDynamicTexture name="dialogTexture" height={1024} width={1024} forParentMesh={true}>
+                      <AdvancedDynamicTexture name="dialogTexture" height={1024} width={1024} createForParentMesh={true}>
                         <Rectangle name="rect-1" background="white" color="#666666" height={dialogHeight/dialogWidth} width={1}
                           scaleY={dialogWidth} scaleX={1}  thickness={2} cornerRadius={12} >
                           <StackPanel name="sp-1">
@@ -215,9 +214,6 @@ export default class With2DUI extends Component
                   <VRExperienceHelper webVROptions={ {createDeviceOrientationCamera: false }} enableInteractions={true} />                
               </Scene>
             </Engine>
-          </div>
-          <div className="col-xs-12 col-md-6">
-            
           </div>
         </div>
       </div>

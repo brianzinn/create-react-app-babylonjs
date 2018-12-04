@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { AppContainer } from 'react-hot-loader' /* react-hot-loader v3 */
+import { AppContainer } from 'react-hot-loader'
 
 import registerServiceWorker from './registerServiceWorker';
 
