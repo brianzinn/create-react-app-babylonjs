@@ -66,7 +66,7 @@ export default class WithVR extends Component
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <Engine canvasId="sample-canvas">
+            <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
               <Scene onMeshPicked={this.onMeshPicked}>
                 <ArcRotateCamera name="arc" target={ new Vector3(0, 1, 0) }
                   alpha={-Math.PI / 2} beta={(0.5 + (Math.PI / 4))}

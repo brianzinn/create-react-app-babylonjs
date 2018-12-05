@@ -35,7 +35,7 @@ return (
     </div>
     <div className="row">
       <div className="col-xs-12 col-md-6">
-        <Engine canvasId="sample-canvas">
+        <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
           <Scene onMeshPicked={meshPicked} onSceneMount={onSceneMount} />
         </Engine>
       </div>

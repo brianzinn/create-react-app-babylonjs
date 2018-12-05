@@ -37,7 +37,7 @@ function WithSkybox() {
       </div>
       <div className="row">
         <div className="col-xs-12 col-md-6">
-          <Engine canvasId="sample-canvas">
+          <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
             <Scene>
               <HemisphericLight name="hemi-light" intensity={0.7} direction={Vector3.Up()} />
               <Skybox rootUrl={SkyboxScenes[Math.abs(skyboxIndex) % SkyboxScenes.length].texture} />

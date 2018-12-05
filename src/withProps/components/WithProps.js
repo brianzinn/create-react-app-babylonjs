@@ -53,7 +53,7 @@ class WithProps extends Component
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <Engine canvasId="sample-canvas">
+            <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
               <Scene>
                 <FreeCamera name="camera1" position={new Vector3(0, 5, -12)} setTarget={{target: new Vector3(0, 1, 0)}} />
                 <HemisphericLight name="light1" intensity={this.props.lightsDim ? 0.3 : 0.7} direction={Vector3.Up()} />

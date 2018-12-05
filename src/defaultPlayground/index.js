@@ -6,7 +6,7 @@ import { PrismCode } from 'react-prism';
 const DefaultPlayground = () => (
   <div className="row">
     <div className="col-xs-12 col-md-6">
-      <Engine canvasId="sample-canvas">
+      <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
         <Scene>
           <FreeCamera name="camera1" position={new Vector3(0, 5, -10)} setTarget={[Vector3.Zero()]} />
           <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />

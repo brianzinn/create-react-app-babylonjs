@@ -180,7 +180,7 @@ export default class RemixMeshMashup extends Component
           </Col>
         </Row>, <Row key="exampleRow">
           <Col xs={12}>
-            <Engine canvasId="sample-canvas" engineOptions={{ stencil: true, preserveDrawingBuffer: true }}>
+            <Engine canvasId="sample-canvas" antialias={true} adaptToDeviceRatio={true} engineOptions={{ stencil: true, preserveDrawingBuffer: true }}>
               <Scene>
                 <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
                 <ArcRotateCamera target={ Vector3.Zero() } radius={4} alpha={-Math.PI / 2} beta={(Math.PI / 2)} minZ={0.001} wheelPrecision={30} />

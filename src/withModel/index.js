@@ -72,7 +72,7 @@ class WithModel extends Component
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-6">
-            <Engine canvasId="sample-canvas">
+            <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
               <Scene>
                 <ArcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2} radius={9.0} target={Vector3.Zero()} minZ={0.001} />
                 <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />

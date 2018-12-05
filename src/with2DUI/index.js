@@ -135,7 +135,7 @@ export default class With2DUI extends Component
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-12">
-            <Engine canvasId="sample-canvas">
+            <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
               <Scene onMeshPicked={this.meshPicked}>
                 <ArcRotateCamera name="camera1" radius={7} beta={Math.PI / 4} alpha={Math.PI / 2} target={Vector3.Zero()} minZ={0.001} wheelPrecision={30}
                   onViewMatrixChangedObservable={(camera) => {
