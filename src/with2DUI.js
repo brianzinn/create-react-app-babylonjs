@@ -173,7 +173,7 @@ export default class With2DUI extends Component
                                   textVerticalAlignment={Control.VERTICAL_ALIGNMENT_TOP}
                                   paddingLeft="2%" paddingTop="6%" width="80%"
                                 />
-                                <Button name="close-icon" background="white" paddingLeft="13%" width="18%" height="75%" onPointerDown={this.hideModal.bind(this)}>
+                                <Button name="close-icon" background="white" paddingLeft="13%" width="18%" height="75%" onPointerDownObservable={this.hideModal.bind(this)}>
                                   <TextBlock text={'\uf00d'} fontFamily="FontAwesome" fontStyle="bold" fontSize={24} color="black" />
                                 </Button>
                               </StackPanel>
@@ -188,7 +188,7 @@ export default class With2DUI extends Component
                                 />
                                 {
                                   this.state.allowedMeshes.map(allowedMesh => (
-                                    <TextBlock key={`opt--${this.state.clickedMeshName}-${allowedMesh}`} text={'• ' + allowedMesh} color="black" fontSize={28} height="20%"
+                                    <TextBlock key={`opt--${this.state.clickedMeshName}-${allowedMesh}`} text={'• ' + allowedMesh} color="black" fontSize={28} height={`${60 / this.state.allowedMeshes.length}%`}
                                       textHorizontalAlignment={Control.HORIZONTAL_ALIGNMENT_LEFT}
                                       textVerticalAlignment={Control.VERTICAL_ALIGNMENT_TOP}
                                       paddingLeft="6%"

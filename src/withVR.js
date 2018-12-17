@@ -5,8 +5,8 @@ import {
   DirectionalLight, ShadowGenerator, EnvironmentHelper
 } from 'react-babylonjs'
 
-import ScaledModelWithProgress from '../ScaledModelWithProgress'
-import SingleAxisRotateMeshBehavior from '../SingleAxisRotateMeshBehavior'
+import ScaledModelWithProgress from './ScaledModelWithProgress'
+import SingleAxisRotateMeshBehavior from './SingleAxisRotateMeshBehavior'
 import { Vector3, Color3, Axis } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowRight, ArrowLeft} from '@githubprimer/octicons-react'

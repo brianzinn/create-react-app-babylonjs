@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
-import { Engine, Scene, ArcRotateCamera, HemisphericLight } from 'react-babylonjs'
+import { Engine, Scene, ArcRotateCamera, HemisphericLight, StandardMaterial } from 'react-babylonjs'
 import { Vector3, Color3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowDown, ArrowUp} from '@githubprimer/octicons-react'
-import ScaledModelWithProgress from '../ScaledModelWithProgress'
+import ScaledModelWithProgress from './ScaledModelWithProgress'
 
 // import './WithModel.css'
 
@@ -79,6 +79,7 @@ class WithModel extends Component
                 
                 <ScaledModelWithProgress rootUrl={`${baseUrl}BoomBox/glTF/`} sceneFilename="BoomBox.gltf" scaleTo={3} 
                   progressBarColor={Color3.FromInts(255, 165, 0)} center={new Vector3(2.5, 0, 0)} />
+
                 <ScaledModelWithProgress rootUrl={`${baseUrl}Avocado/glTF/`} sceneFilename="Avocado.gltf" scaleTo={this.state.avocadoScaling} 
                   progressBarColor={Color3.FromInts(255, 165, 0)} center={new Vector3(-2.5, this.state.avocadoYPos, 0)} />
               </Scene>

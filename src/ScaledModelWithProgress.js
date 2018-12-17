@@ -28,7 +28,12 @@ export default class ScaledModelWithProgress extends Component {
                         this.setState({loadProgress: modelLoadProgress})
                         
                     }}
-                    onModelLoaded={() => {this.setState({loadProgress: 1})}}
+                    onModelLoaded={(model) => {
+                        this.setState({loadProgress: 1})
+                        if (this.props.onModelLoaded) {
+                            this.props.onModelLoaded(model)
+                        }
+                    }}
                     position={this.props.center}
                     rootUrl={this.props.rootUrl}
                     sceneFilename={this.props.sceneFilename}

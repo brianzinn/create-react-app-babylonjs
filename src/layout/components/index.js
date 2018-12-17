@@ -48,6 +48,11 @@ class Layout extends Component {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink to={`${process.env.PUBLIC_URL}/dragNdrop`} activeClassName="active" className="nav-link">
+                                    <Octicon icon={ TriangleRight }/> Drag'n'drop
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">
                                     <Octicon icon={ TriangleRight }/> Model
                                 </NavLink>
@@ -105,6 +110,9 @@ class Layout extends Component {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink to={`${process.env.PUBLIC_URL}/withProps`} activeClassName="active" className="nav-link">Props</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink to={`${process.env.PUBLIC_URL}/dragNdrop`} activeClassName="active" className="nav-link">Drag 'n' Drop</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink to={`${process.env.PUBLIC_URL}/withModel`} activeClassName="active" className="nav-link">Model</NavLink>
