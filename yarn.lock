@@ -1008,26 +1008,26 @@ babylon@^6.17.0, babylon@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
-babylonjs-gltf2interface@4.0.0-alpha.9:
-  version "4.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-4.0.0-alpha.9.tgz#d4cf7f537f92924468ebbe10f73a3073da53bc57"
+babylonjs-gltf2interface@4.0.0-alpha.16:
+  version "4.0.0-alpha.16"
+  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-4.0.0-alpha.16.tgz#9a77a3cd7a67298c8686cda5ed1a6db7f1b0b1d9"
 
-babylonjs-gui@^4.0.0-alpha.9:
-  version "4.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-4.0.0-alpha.9.tgz#1c678807a98b199540ff7f41db321769029045b3"
+babylonjs-gui@^4.0.0-alpha.16:
+  version "4.0.0-alpha.16"
+  resolved "https://registry.yarnpkg.com/babylonjs-gui/-/babylonjs-gui-4.0.0-alpha.16.tgz#05f95fd9ff4b7a1b9429bed42a946148e411339e"
   dependencies:
-    babylonjs "4.0.0-alpha.9"
+    babylonjs "4.0.0-alpha.16"
 
-babylonjs-loaders@^4.0.0-alpha.9:
-  version "4.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-4.0.0-alpha.9.tgz#5ae5794a184c79f8ed645679d555801fea7466e3"
+babylonjs-loaders@^4.0.0-alpha.16:
+  version "4.0.0-alpha.16"
+  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-4.0.0-alpha.16.tgz#a9b018506938c62d97463c819b009f2e5d8c4c1b"
   dependencies:
-    babylonjs "4.0.0-alpha.9"
-    babylonjs-gltf2interface "4.0.0-alpha.9"
+    babylonjs "4.0.0-alpha.16"
+    babylonjs-gltf2interface "4.0.0-alpha.16"
 
-babylonjs@4.0.0-alpha.9, babylonjs@^4.0.0-alpha.9:
-  version "4.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-4.0.0-alpha.9.tgz#22dbe53a17585d530257155a847cf5b66c4cf5e2"
+babylonjs@4.0.0-alpha.16, babylonjs@^4.0.0-alpha.16:
+  version "4.0.0-alpha.16"
+  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-4.0.0-alpha.16.tgz#26b808f2b97f1aa2d5219a9da9c718657244239d"
 
 balanced-match@^0.4.2:
   version "0.4.2"

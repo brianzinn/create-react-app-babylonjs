@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React /* , { useState }*/ from 'react';
 import { Engine, Scene, Sphere, StandardMaterial, ArcRotateCamera, PointLight, Ground, Box, Torus } from 'react-babylonjs';
 import { Vector3, Color3 } from 'babylonjs';
 
@@ -8,7 +8,7 @@ var currentMesh;
 
 var getGroundPosition = function (evt, scene) {
     // Use a predicate to get position on the ground
-    var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name == 'ground'; });
+    var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name === 'ground'; });
     if (pickinfo.hit) {
         return pickinfo.pickedPoint;
     }
@@ -75,26 +75,27 @@ function dragNdrop() {
     <div>
       <div className="row">
         <div className="col-xs-12 col-md-12">
-          <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
+          <Engine antialias={true} engineOptions={{preserveDrawingBuffer:true, stencil:true}} canvasId="sample-canvas">
             <Scene clearColor={new Color3(0, 0, 0)} onScenePointerDown={onPointerDown} onScenePointerUp={onPointerUp} onScenePointerMove={onPointerMove}>
               <PointLight name="omni" position={new Vector3(0, 50, 0)} />
               
               <ArcRotateCamera name="camera" alpha={0} beta={0} radius={10} target={Vector3.Zero()} setPosition={[new Vector3(20, 200, 400)]}
-                lowerBetaLimit={0.1} upperBetaLimit={(Math.PI / 2) * 0.99} lowerRadiusLimit={150} minZ={0.001} wheelPrecision={50}
-                onCreated={(camera) => console.log('created camera:', camera)}
+                lowerBetaLimit={0.1} upperBetaLimit={(Math.PI / 2) * 0.99} lowerRadiusLimit={150}
               />
 
-              <Ground name="ground" width={1000} height={1000} subdivisions={1} />
+              <Ground name="ground" width={1000} height={1000} subdivisions={1}>
+                <StandardMaterial name="groundMat" specularColor={ Color3.Black()} />
+              </Ground>
 
               <Sphere name="red" diameter={20} segments={32} position={new Vector3(-100, 10, 0)}>
                 <StandardMaterial name="redMat" diffuseColor={new Color3(0.4, 0.4, 0.4)} specularColor={new Color3(0.4, 0.4, 0.4)} emissiveColor={Color3.Red()} />
               </Sphere>
 
-              <Box name="green" size={20} position={new Vector3(0, 10, -100)}>
+              <Box name="green" size={20} position={new Vector3(0, 11, -100)}>
                 <StandardMaterial name="greenMat" diffuseColor={new Color3(0.4, 0.4, 0.4)} specularColor={new Color3(0.4, 0.4, 0.4)} emissiveColor={Color3.Green()} />
               </Box>
 
-              <Box name="blue" size={20} position={new Vector3(100, 10, 0)}>
+              <Box name="blue" size={20} position={new Vector3(100, 11, 0)}>
                 <StandardMaterial name="greenMat" diffuseColor={new Color3(0.4, 0.4, 0.4)} specularColor={new Color3(0.4, 0.4, 0.4)} emissiveColor={Color3.Blue()} />
               </Box>
 
