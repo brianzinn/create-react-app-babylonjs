@@ -57,17 +57,12 @@ class WithModel extends Component
     return (
       <div>
         <div className="row">
+          <div className="col-xs-3 col-lg-3 align-top">&nbsp;</div>
           <div className="col-xs-3 col-lg-3 align-top">
             Move Avocado: 
             <Button onClick={this.moveAvocadoUp}><Octicon icon={ArrowUp}/></Button>
             &nbsp;&nbsp;
             <Button onClick={this.moveAvocadoDown}><Octicon icon={ArrowDown}/></Button>
-          </div>
-          <div className="col-xs-3 col-lg-3 align-top">
-            Avocado Size:
-            <Button onClick={this.increaseAvocadoSize}><Octicon icon={ArrowUp}/></Button>
-            &nbsp;&nbsp;
-            <Button onClick={this.decreaseAvocadoSize}><Octicon icon={ArrowDown}/></Button>
           </div>
         </div>
         <div className="row">
