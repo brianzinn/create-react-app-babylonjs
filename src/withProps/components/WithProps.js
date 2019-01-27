@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Engine, Scene, FreeCamera, HemisphericLight, Box, StandardMaterial } from 'react-babylonjs'
-import { Vector3, Axis, Color3 } from 'babylonjs';
+import { Vector3, Axis, Color3, Color4 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Switch from "react-switch";
 

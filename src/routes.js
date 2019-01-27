@@ -14,7 +14,7 @@ import RemixMeshMashup from './remixMeshMashup'
 import Home from './home/components'
 
 export const routes = (
-    <Layout>
+    <Layout sidebarCollapsed={false}>
         <Switch>
             <Route exact={true} path={`${process.env.PUBLIC_URL}/`} component={Home} />
             <Route path={`${process.env.PUBLIC_URL}/defaultPlayground`} component={DefaultPlayground} />

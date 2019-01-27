@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
-import { setConfig } from 'react-hot-loader'
 import { Button } from 'reactstrap';
 import { Engine, Scene, Skybox, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, HolographicButton } from 'react-babylonjs';
 import { Vector3 } from 'babylonjs';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowRight, ArrowLeft} from '@githubprimer/octicons-react';
-
-// for hooks.  temporarily needed only while 16.7 is in alpha.
-setConfig({
-  ignoreSFC: true, // RHL will be __completely__ disabled for SFC
-  pureRender: true, // RHL will not change render method
-})
 
 let globalIndex = 0 // due to closure and how observables are assigned.
 const SkyboxScenes = [{

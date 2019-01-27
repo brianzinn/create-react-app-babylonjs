@@ -4,7 +4,7 @@ import {
   Engine, Scene, ArcRotateCamera, HemisphericLight, Plane, AdvancedDynamicTexture, TextBlock, Rectangle, StackPanel, Button, Box, StandardMaterial, VRExperienceHelper
 } from 'react-babylonjs'
 
-import { Vector3, Color3, Animation, ExponentialEase, EasingFunction } from 'babylonjs';
+import { Vector3, Color3, Color4, Animation, ExponentialEase, EasingFunction } from 'babylonjs';
 
 export default class With2DUI extends Component 
 {
@@ -19,7 +19,8 @@ export default class With2DUI extends Component
         'red box',
         'blue box',
         'green box'
-      ]
+      ],
+      sceneClearColor: new Color4(0.5, 0.5, 0.5, 0.5)
     }
 
     this.meshPicked = this.meshPicked.bind(this);
@@ -31,16 +32,20 @@ export default class With2DUI extends Component
     if (this.state.allowedMeshes.indexOf(mesh.name) !== -1) {
       const clickedMeshName = mesh.name
       let clickedMeshColor;
+      let sceneClearColor;
       switch(clickedMeshName) {
         case 'red box':
           clickedMeshColor = Color3.Red().toHexString()
+          sceneClearColor = new Color4(1, 0, 0, 0.5)
           break;
         case 'blue box':
           clickedMeshColor = Color3.Blue().toHexString()
+          sceneClearColor = new Color4(0, 0, 1, 0.5)
           break;
         case 'green box':
         default:
           clickedMeshColor = Color3.Green().toHexString()
+          sceneClearColor = new Color4(0, 1, 0, 0.5)
           break;
       }
 
@@ -48,7 +53,8 @@ export default class With2DUI extends Component
         ...state,
         showModal: true,
         clickedMeshName,
-        clickedMeshColor
+        clickedMeshColor,
+        sceneClearColor
       }))
     } else {
       console.log('ignoring clicks on:', mesh.name, this.state)
@@ -63,6 +69,7 @@ export default class With2DUI extends Component
 
     this.setState((state) => ({
       ...state,
+      sceneClearColor: new Color4(0.5, 0.5, 0.5, 0.5),
       allowedMeshes: state.allowedMeshes.filter(name => name !== state.clickedMeshName)
     }))
 
@@ -99,7 +106,8 @@ export default class With2DUI extends Component
       this.setState((state) => ({
         ...state,
         showModal: false,
-        plane: undefined
+        plane: undefined,
+        sceneClearColor: new Color4(0.5, 0.5, 0.5, 0.5)
       }));
     });
   }
@@ -136,7 +144,7 @@ export default class With2DUI extends Component
         <div className="row">
           <div className="col-xs-12 col-md-12">
             <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
-              <Scene onMeshPicked={this.meshPicked}>
+              <Scene clearColor={this.state.sceneClearColor} onMeshPicked={this.meshPicked}>
                 <ArcRotateCamera name="camera1" radius={7} beta={Math.PI / 4} alpha={Math.PI / 2} target={Vector3.Zero()} minZ={0.001} wheelPrecision={30}
                   onViewMatrixChangedObservable={(camera) => {
                     let { plane } = this.state

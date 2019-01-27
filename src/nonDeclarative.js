@@ -9,15 +9,16 @@ function meshPicked(mesh) {
 
 function onSceneMount(e) {
   const { canvas, scene } = e
+  console.log('e', e)
 
   // Scene to build your environment, Canvas you need to attach your camera.       
-  var camera = new ArcRotateCamera("Camera", 0, 1.05, 6, Vector3.Zero(), scene)
+  var camera = new ArcRotateCamera("Camera", 0, 1.05, 8, Vector3.Zero(), scene)
   camera.attachControl(canvas)
 
   // setup your scene here
-  MeshBuilder.CreateBox('box', { size: 3}, scene)
+  MeshBuilder.CreateBox('box', { size: 3 }, scene)
   new HemisphericLight('light', Vector3.Up(), scene);
-  
+
   scene.getEngine().runRenderLoop(() => {
       if (scene) {
           scene.render();

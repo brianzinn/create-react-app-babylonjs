@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-import { Model, Box, StandardMaterial, Mesh } from 'react-babylonjs'
+import { Model, Box, StandardMaterial, Mesh, withScene } from 'react-babylonjs'
 import { Vector3, Matrix, Color3 } from 'babylonjs';
 
 // try with later versions of RHL to get hooks working here:
 // const [loadProgress, updateProgress] = useState(0)
-export default class ScaledModelWithProgress extends Component {
+class ScaledModelWithProgress extends Component {
 
     constructor() {
         super()
@@ -31,7 +31,7 @@ export default class ScaledModelWithProgress extends Component {
                     onModelLoaded={(model) => {
                         this.setState({loadProgress: 1})
                         if (this.props.onModelLoaded) {
-                            this.props.onModelLoaded(model)
+                            this.props.onModelLoaded(model, this.props.sceneContext)
                         }
                     }}
                     position={this.props.center}
@@ -57,3 +57,5 @@ export default class ScaledModelWithProgress extends Component {
         )
     }
 }
+
+export default withScene(ScaledModelWithProgress) 
