@@ -120,7 +120,7 @@ return (
   <div>
     <div className="row">
       <div className="col-xs-12 col-lg-12 align-top">
-        Not using any declarative components.  Note that you can mix this non-declarative model with declarative.
+        You can mix declarative with non-declarative.  This example just copies the "Depth of Field" sample playground from the <a href="https://doc.babylonjs.com/how_to/using_default_rendering_pipeline" target="_new">default rendering pipeline documentation</a>.
       </div>
     </div>
     <div className="row">
@@ -135,23 +135,12 @@ return (
 {`// If you import Scene from 'babylonjs' then make sure to alias one of them.
 import React, { Component } from 'react'
 import { Scene } from 'react-babylonjs'
-import { Vector3, ArcRotateCamera, MeshBuilder, HemisphericLight } from 'babylonjs';
-
-function meshPicked(mesh) {
-  console.log('mesh picked:', mesh)
-}
+import { Vector3, ArcRotateCamera, ... } from 'babylonjs';
 
 function onSceneMount(e) {
   const { canvas, scene } = e
 
-  // Scene to build your environment, Canvas you need to attach your camera.       
-  var camera = new ArcRotateCamera("Camera", 0, 1.05, 6, Vector3.Zero(), scene)
-  camera.attachControl(canvas)
-
-  // setup your scene here
-  MeshBuilder.CreateBox('box', { size: 3}, scene)
-  new HemisphericLight('light', Vector3.Up(), scene);
-  
+  // Your code here (ie: playground code could go here)...  
   scene.getEngine().runRenderLoop(() => {
       if (scene) {
           scene.render();
@@ -162,7 +151,7 @@ function onSceneMount(e) {
 function NonDeclarative() {
   return (
     <Engine canvasId="sample-canvas">
-      <Scene onMeshPicked={meshPicked} onSceneMount={onSceneMount} />
+      <Scene onSceneMount={onSceneMount} />
     </Engine>
   );
 }`}
