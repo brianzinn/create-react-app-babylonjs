@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "80f723c0e36e5b9af11a0188153fa4ba",
+    "revision": "57b35f54a2822910c2b1435a3ba571e6",
     "url": "/create-react-app-babylonjs/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/create-react-app-babylonjs/static/css/2.62f84164.chunk.css"
   },
   {
-    "revision": "add93b2854777b2ec8e6",
+    "revision": "a5c848b8871d57c02d24",
     "url": "/create-react-app-babylonjs/static/css/main.e1b91c2b.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/create-react-app-babylonjs/static/js/2.14f7b9ef.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "add93b2854777b2ec8e6",
-    "url": "/create-react-app-babylonjs/static/js/main.8f851c38.chunk.js"
+    "revision": "a5c848b8871d57c02d24",
+    "url": "/create-react-app-babylonjs/static/js/main.5353d83b.chunk.js"
   },
   {
     "revision": "437546cdeb9434e93c75",
