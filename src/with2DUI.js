@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Control } from '@babylonjs/gui'
 import { Engine, Scene } from 'react-babylonjs'
-
-import { Vector3, Color3, Color4, Animation, ExponentialEase, EasingFunction } from '@babylonjs/core';
+import { Vector3, Color3, Color4, Animation, ExponentialEase, EasingFunction, Texture } from '@babylonjs/core';
 
 export default class With2DUI extends Component 
 {
@@ -170,7 +169,13 @@ export default class With2DUI extends Component
                 </box>
                 {this.state.showModal === true &&
                 <plane name='dialog' width={3} height={3 * (dialogHeight / dialogWidth)} onCreated={this.setPlane} rotation={new Vector3(0, Math.PI, 0)}>
-                  <advancedDynamicTexture name='dialogTexture' height={1024} width={1024} createForParentMesh>
+                  <advancedDynamicTexture
+                    name='dialogTexture'
+                    height={1024} width={1024}
+                    createForParentMesh
+                    generateMipMaps={true}
+                    samplingMode={Texture.TRILINEAR_SAMPLINGMODE}
+                  >
                     <rectangle name='rect-1' background='white' color='#666666' height={dialogHeight / dialogWidth} width={1}
                       scaleY={dialogWidth} scaleX={1} thickness={2} cornerRadius={12} >
                       <stackPanel name='sp-1'>
