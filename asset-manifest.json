@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.e1b91c2b.chunk.css",
-    "main.js": "/static/js/main.5fdd90f9.chunk.js",
-    "main.js.map": "/static/js/main.5fdd90f9.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.db63c131.js",
-    "runtime-main.js.map": "/static/js/runtime-main.db63c131.js.map",
-    "static/css/2.62f84164.chunk.css": "/static/css/2.62f84164.chunk.css",
-    "static/js/2.14f7b9ef.chunk.js": "/static/js/2.14f7b9ef.chunk.js",
-    "static/js/2.14f7b9ef.chunk.js.map": "/static/js/2.14f7b9ef.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.f87a3ff37f7c0a51648b47331d95c370.js": "/precache-manifest.f87a3ff37f7c0a51648b47331d95c370.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.62f84164.chunk.css.map": "/static/css/2.62f84164.chunk.css.map",
-    "static/css/main.e1b91c2b.chunk.css.map": "/static/css/main.e1b91c2b.chunk.css.map",
-    "static/js/2.14f7b9ef.chunk.js.LICENSE.txt": "/static/js/2.14f7b9ef.chunk.js.LICENSE.txt"
+    "main.css": "/create-react-app-babylonjs/static/css/main.e1b91c2b.chunk.css",
+    "main.js": "/create-react-app-babylonjs/static/js/main.8f851c38.chunk.js",
+    "main.js.map": "/create-react-app-babylonjs/static/js/main.8f851c38.chunk.js.map",
+    "runtime-main.js": "/create-react-app-babylonjs/static/js/runtime-main.c8b4cc7b.js",
+    "runtime-main.js.map": "/create-react-app-babylonjs/static/js/runtime-main.c8b4cc7b.js.map",
+    "static/css/2.62f84164.chunk.css": "/create-react-app-babylonjs/static/css/2.62f84164.chunk.css",
+    "static/js/2.14f7b9ef.chunk.js": "/create-react-app-babylonjs/static/js/2.14f7b9ef.chunk.js",
+    "static/js/2.14f7b9ef.chunk.js.map": "/create-react-app-babylonjs/static/js/2.14f7b9ef.chunk.js.map",
+    "index.html": "/create-react-app-babylonjs/index.html",
+    "precache-manifest.983ff2e4baa73930ff5c54eeabd487bf.js": "/create-react-app-babylonjs/precache-manifest.983ff2e4baa73930ff5c54eeabd487bf.js",
+    "service-worker.js": "/create-react-app-babylonjs/service-worker.js",
+    "static/css/2.62f84164.chunk.css.map": "/create-react-app-babylonjs/static/css/2.62f84164.chunk.css.map",
+    "static/css/main.e1b91c2b.chunk.css.map": "/create-react-app-babylonjs/static/css/main.e1b91c2b.chunk.css.map",
+    "static/js/2.14f7b9ef.chunk.js.LICENSE.txt": "/create-react-app-babylonjs/static/js/2.14f7b9ef.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.db63c131.js",
+    "static/js/runtime-main.c8b4cc7b.js",
     "static/css/2.62f84164.chunk.css",
     "static/js/2.14f7b9ef.chunk.js",
     "static/css/main.e1b91c2b.chunk.css",
-    "static/js/main.5fdd90f9.chunk.js"
+    "static/js/main.8f851c38.chunk.js"
   ]
 }
