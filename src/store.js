@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 
 import { createBrowserHistory } from 'history'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
-import reduxWiretap from 'redux-wiretap'
+// import reduxWiretap from 'redux-wiretap'
 
 import rootReducer from './rootReducer';
 
@@ -12,11 +12,11 @@ export const history = createBrowserHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
 const store = createStore(
-  connectRouter(history)(rootReducer), // new root reducer with router state
+  rootReducer(history), // new root reducer with router state
   compose(
     applyMiddleware(
       routerMiddleware(history), // for dispatching history actions
-      reduxWiretap
+      // reduxWiretap
       // other middleware ...
     ),
   ),

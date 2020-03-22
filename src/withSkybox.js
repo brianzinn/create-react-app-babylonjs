@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
-import { Engine, Scene, Skybox, HemisphericLight, ArcRotateCamera, GUI3DManager, CylinderPanel, HolographicButton } from 'react-babylonjs';
-import { Vector3 } from 'babylonjs';
+import { Engine, Scene, Skybox } from 'react-babylonjs';
+import { Vector3 } from '@babylonjs/core';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowRight, ArrowLeft} from '@githubprimer/octicons-react';
 
@@ -32,17 +32,17 @@ function WithSkybox() {
         <div className="col-xs-12 col-md-6">
           <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
             <Scene>
-              <HemisphericLight name="hemi-light" intensity={0.7} direction={Vector3.Up()} />
+              <hemisphericLight name="hemi-light" intensity={0.7} direction={Vector3.Up()} />
               <Skybox rootUrl={SkyboxScenes[Math.abs(skyboxIndex) % SkyboxScenes.length].texture} />
-              <ArcRotateCamera target={ Vector3.Zero() } radius={10}
+              <arcRotateCamera target={ Vector3.Zero() } radius={10}
                 alpha={-Math.PI / 2} beta={(Math.PI / 2)} minZ={0.001} wheelPrecision={50}
               />
-              <GUI3DManager name="gui3d">
-                <CylinderPanel name="panel" margin={0.2}>
+              <gui3DManager name="gui3d">
+                <cylinderPanel name="panel" margin={0.2}>
                   {
                     Array.from(new Array(50), (_, index) => index).map(number => {
                       return (
-                        <HolographicButton
+                        <holographicButton
                           key={`btn-${number}`}
                           name={`btn-name-${number}`}
                           text={`btn-text-${number}`}
@@ -51,8 +51,8 @@ function WithSkybox() {
                       )
                     })
                   }
-                </CylinderPanel>
-              </GUI3DManager>
+                </cylinderPanel>
+              </gui3DManager>
             </Scene>
           </Engine>
         </div>
@@ -62,15 +62,15 @@ function WithSkybox() {
 {`<Scene id="sample-canvas">
 <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
 <Skybox texture={activeSkybox.texture} />
-<ArcRotateCamera target={ Vector3.Zero() } radius={10}
+<arcRotateCamera target={ Vector3.Zero() } radius={10}
 alpha={-Math.PI / 4} beta={(Math.PI / 2)}
 />
-<GUI3DManager name="gui3d">
-<CylinderPanel name="panel" margin={0.2}>
+<gui3DManager name="gui3d">
+<cylinderPanel name="panel" margin={0.2}>
   {
     Array.from(new Array(60), (_, index) => index).map(number => {
       return (
-        <HolographicButton
+        <holographicButton
           key={\`btn-\${number}\`}
           name={\`btn-name-\${number}\`}
           text={\`btn-text-\${number}\`}
@@ -79,8 +79,8 @@ alpha={-Math.PI / 4} beta={(Math.PI / 2)}
       )
     })
   }
-</CylinderPanel>
-</GUI3DManager>
+</cylinderPanel>
+</gui3DManager>
 </Scene>`}
               </PrismCode>
             </pre>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'reactstrap'
-import { Engine, Scene, ArcRotateCamera, HemisphericLight, withBabylonJS } from 'react-babylonjs'
-import { Vector3, Color3, ActionManager, SetValueAction } from 'babylonjs';
+import { Engine, Scene, withBabylonJS } from 'react-babylonjs'
+import { Vector3, Color3, ActionManager, SetValueAction } from '@babylonjs/core';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowDown, ArrowUp} from '@githubprimer/octicons-react'
 import ScaledModelWithProgress from './ScaledModelWithProgress'
@@ -91,8 +91,8 @@ class WithModel extends Component
           <div className="col-xs-12 col-md-6">
             <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
               <Scene>
-                <ArcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2} radius={9.0} target={Vector3.Zero()} minZ={0.001} />
-                <HemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
+                <arcRotateCamera name="camera1" alpha={Math.PI / 2} beta={Math.PI / 2} radius={9.0} target={Vector3.Zero()} minZ={0.001} />
+                <hemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
                 
                 <ScaledModelWithProgress rootUrl={`${baseUrl}BoomBox/glTF/`} sceneFilename="BoomBox.gltf" scaleTo={3} 
                   progressBarColor={Color3.FromInts(255, 165, 0)} center={new Vector3(2.5, 0, 0)}
@@ -109,10 +109,10 @@ class WithModel extends Component
             <pre>
                 <PrismCode className="language-jsx">
 {`<Scene id="sample-canvas">
-  <ArcRotateCamera name="camera1"
+  <arcRotateCamera name="camera1"
     alpha={Math.PI / -2} beta={Math.PI / 2}
     radius={0.05} target={Vector3.Zero()} minZ={0.001} />
-  <HemisphericLight name="light1" intensity={0.7}
+  <hemisphericLight name="light1" intensity={0.7}
     direction={Vector3.Up()} />
   <Model sceneFilename="BoomBox.gltf"
     rootUrl = {\`\${baseUrl}BoomBox/glTF/\`}

@@ -10,7 +10,6 @@ import WithVR from  './withVR';
 import WithSkybox from  './withSkybox';
 import With2DUI from './with2DUI'
 import NonDeclarative from './nonDeclarative'
-import RemixMeshMashup from './remixMeshMashup'
 import Home from './home/components'
 
 export const routes = (
@@ -24,8 +23,8 @@ export const routes = (
             <Route path={`${process.env.PUBLIC_URL}/withVR`} component={WithVR} />
             <Route path={`${process.env.PUBLIC_URL}/withSkybox`} component={WithSkybox} />
             <Route path={`${process.env.PUBLIC_URL}/with2DUI`} component={With2DUI} />
-            <Route path={`${process.env.PUBLIC_URL}/meshMashup`} component={RemixMeshMashup} />
             <Route path={`${process.env.PUBLIC_URL}/nonDeclarative`} component={NonDeclarative} />
+            <Route component={Home} />
         </Switch>
     </Layout>
 );

@@ -76,13 +76,7 @@ class Layout extends Component {
                                 <NavLink to={`${process.env.PUBLIC_URL}/nonDeclarative`} activeClassName="active" className="nav-link">
                                     <Octicon icon={ TriangleRight }/> Non-Declarative
                                 </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink to={`${process.env.PUBLIC_URL}/meshMashup`} activeClassName="active" className="nav-link">
-                                    <Octicon icon={ TriangleRight }/> Remix 3D Mashup
-                                </NavLink>
-                            </NavItem>
-                            
+                            </NavItem>                            
                         </ul>
                         <ul className="list-unstyled CTAs">
                             <li>
@@ -128,9 +122,6 @@ class Layout extends Component {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink to={`${process.env.PUBLIC_URL}/nonDeclarative`} activeClassName="active" className="nav-link">Non-Declarative</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink to={`${process.env.PUBLIC_URL}/meshMashup`} activeClassName="active" className="nav-link">Remix 3D Mashup</NavLink>
                                 </NavItem>
                             </Nav>
                         </Navbar>

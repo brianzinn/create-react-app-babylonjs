@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { Model, Box, StandardMaterial, Mesh, withScene } from 'react-babylonjs'
-import { Vector3, Matrix, Color3 } from 'babylonjs';
+import { Vector3, Matrix, Color3 } from '@babylonjs/core';
 
 // try with later versions of RHL to get hooks working here:
 // const [loadProgress, updateProgress] = useState(0)

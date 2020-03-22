@@ -1,7 +1,7 @@
 import React from 'react'
 import { Engine, Scene } from 'react-babylonjs'
-import { Color3, FreeCamera, Vector3, ArcRotateCamera, DefaultRenderingPipeline, MeshBuilder, HemisphericLight, DepthOfFieldEffectBlurLevel, PBRMetallicRoughnessMaterial, CubeTexture, Mesh } from 'babylonjs';
-import { Control, TextBlock, Slider, StackPanel, AdvancedDynamicTexture } from 'babylonjs-gui'
+import { Color3, FreeCamera, Vector3, ArcRotateCamera, DefaultRenderingPipeline, HemisphericLight, DepthOfFieldEffectBlurLevel, PBRMetallicRoughnessMaterial, CubeTexture, Mesh } from '@babylonjs/core';
+import { Control, TextBlock, Slider, StackPanel, AdvancedDynamicTexture } from '@babylonjs/gui'
 import { PrismCode } from 'react-prism';
 
 function meshPicked(mesh) {
@@ -104,7 +104,7 @@ function onSceneMount(e) {
   // Move depth of field focus distance automatically at the start
   scene.onBeforeRenderObservable.add(function(){
       if(moveFocusDistance){
-          pipeline.depthOfField.focusDistance = 600 + (4000 * (Math.sin((new Date).getTime()/1000)+1)/2)
+          pipeline.depthOfField.focusDistance = 600 + (4000 * (Math.sin((new Date()).getTime()/1000)+1)/2)
       }
   })
 
@@ -132,10 +132,10 @@ return (
       <div className="col-xs-12 col-md-6">
         <pre>
             <PrismCode className="language-jsx">
-{`// If you import Scene from 'babylonjs' then make sure to alias one of them.
+{`// If you import Scene from '@babylonjs/core' then make sure to alias one of them.
 import React, { Component } from 'react'
 import { Scene } from 'react-babylonjs'
-import { Vector3, ArcRotateCamera, ... } from 'babylonjs';
+import { Vector3, ArcRotateCamera, ... } from '@babylonjs/core';
 
 function onSceneMount(e) {
   const { canvas, scene } = e

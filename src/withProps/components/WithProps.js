@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Engine, Scene, FreeCamera, HemisphericLight, Box, StandardMaterial } from 'react-babylonjs'
-import { Vector3, Axis, Color3, Color4 } from 'babylonjs';
+import { Engine, Scene } from 'react-babylonjs'
+import { Vector3, Axis, Color3 } from '@babylonjs/core';
 import { PrismCode } from 'react-prism';
 import Switch from "react-switch";
 
@@ -55,12 +55,12 @@ class WithProps extends Component
           <div className="col-xs-12 col-md-6">
             <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
               <Scene>
-                <FreeCamera name="camera1" position={new Vector3(0, 5, -12)} setTarget={{target: new Vector3(0, 1, 0)}} />
-                <HemisphericLight name="light1" intensity={this.props.lightsDim ? 0.3 : 0.7} direction={Vector3.Up()} />
-                <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
+                <freeCamera name="camera1" position={new Vector3(0, 5, -12)} setTarget={{target: new Vector3(0, 1, 0)}} />
+                <hemisphericLight name="light1" intensity={this.props.lightsDim ? 0.3 : 0.7} direction={Vector3.Up()} />
+                <box name="box" size={4} position={new Vector3(0, 1, 0)}>
                   <SingleAxisRotateMeshBehavior rpm={this.props.clockwise ? 12 : -12 } axis={Axis.Y} />
-                  <StandardMaterial name="mat1" diffuseColor={Color3.Yellow()} specularColor={Color3.Black()} />
-                </Box>
+                  <standardMaterial name="mat1" diffuseColor={Color3.Yellow()} specularColor={Color3.Black()} />
+                </box>
               </Scene>
             </Engine>
           </div>
@@ -68,15 +68,15 @@ class WithProps extends Component
             <pre>
                 <PrismCode className="language-jsx">
 {` <Scene id="sample-canvas">
-  <FreeCamera name="camera1"
+  <freeCamera name="camera1"
     position={new Vector3(0, 5, -10)} target={Vector3.Zero()} />
-  <HemisphericLight name="light1" direction={Vector3.Up()}
+  <hemisphericLight name="light1" direction={Vector3.Up()}
     intensity={this.props.lightsDim ? 0.3 : 0.7} />
-  <Box name="box" size={4} position={new Vector3(0, 1, 0)}>
-    <StandardMaterial name="yellow-mat"
+  <box name="box" size={4} position={new Vector3(0, 1, 0)}>
+    <standardMaterial name="yellow-mat"
       diffuseColor={Color3.Yellow()} specularColor={Color3.Black()} />
     <RotateMeshBehavior rpm={this.props.clockwise ? 12 : -12 } axis={Axis.Y} />
-  </Box>
+  </box>
 </Scene>`}
                 </PrismCode>
               </pre>
