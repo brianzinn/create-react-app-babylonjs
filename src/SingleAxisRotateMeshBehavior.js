@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { HostWithEvents, withBabylonJS } from 'react-babylonjs'
+import { HostWithEvents } from 'react-babylonjs'
 import { Axis } from '@babylonjs/core'
 
 class SingleAxisRotateMeshBehavior extends Component {
@@ -25,11 +25,10 @@ class SingleAxisRotateMeshBehavior extends Component {
               this.rotationProperty = 'y';
               break;
           }
-          let deltaTimeInMillis = engine.getDeltaTime()
+          let deltaTimeInMillis = engine.getDeltaTime();
           parent.hostInstance.rotation[this.rotationProperty] += ((this.props.rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000));
         })
-        }      
-        
+        }
       }/>)
     }
 }
@@ -45,4 +44,4 @@ SingleAxisRotateMeshBehavior.propTypes = {
   axis: PropTypes.object
 };
 
-export default withBabylonJS(SingleAxisRotateMeshBehavior)
+export default SingleAxisRotateMeshBehavior
