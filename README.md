@@ -18,10 +18,14 @@ npm start         # Compile and launch (same as `yarn start`)
 If you are starting a fresh Create React App, then you should only need these dependencies.
 ```csh
 yarn add @babylonjs/core
+yarn add @babylonjs/gui
 yarn add react-reconciler
 yarn add react-babylonjs
-
+```
+or
+```csh
 npm install @babylonjs/core
+npm install @babylonjs/gui
 npm install react-reconciler
 npm install react-babylonjs
 ```
