@@ -9,25 +9,10 @@ If you are cloning this repo, you just need:
 $ yarn install    # Install project dependencies
 $ yarn start      # Compile and launch (same as `npm start`)
 ```
-or
-```bash
-npm install       # Install project dependencies
-npm start         # Compile and launch (same as `yarn start`)
-```
 
 If you are starting a fresh Create React App, then you should only need these dependencies.
 ```csh
-yarn add @babylonjs/core
-yarn add @babylonjs/gui
-yarn add react-reconciler
-yarn add react-babylonjs
-```
-or
-```csh
-npm install @babylonjs/core
-npm install @babylonjs/gui
-npm install react-reconciler
-npm install react-babylonjs
+yarn add @babylonjs/core @babylonjs/gui react-babylonjs
 ```
 
 If you are using the BabylonJS GUI components then you will need '@babylonjs/gui' and if you are loading 3D models '@babylonjs/loaders'.  They are peer dependencies, so you will get warnings.
