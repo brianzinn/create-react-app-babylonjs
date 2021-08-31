@@ -1,12 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component, useRef } from 'react'
 import { Button } from 'reactstrap'
-import { Engine, Scene } from 'react-babylonjs'
+import { Engine, Scene, useBeforeRender } from 'react-babylonjs'
 
 import ScaledModelWithProgress from './ScaledModelWithProgress'
-import SingleAxisRotateMeshBehavior from './SingleAxisRotateMeshBehavior'
-import { Vector3, Color3, Axis } from '@babylonjs/core';
+import { Vector3, Color3 } from '@babylonjs/core';
 import { PrismCode } from 'react-prism';
 import Octicon, {ArrowRight, ArrowLeft} from '@githubprimer/octicons-react'
+
+const SpinningIcoSphere = ({ name, color, position }) => {
+  var boxRef = useRef(null);
+
+  var rpm = 4;
+  useBeforeRender((scene) => {
+    if (boxRef.current !== null) {
+      const deltaTimeInMillis = scene.getEngine().getDeltaTime();
+      boxRef.current.rotation.y += ((rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000));
+    }
+  })
+
+  return (<icoSphere name={name} position={position} radius={0.2} flat={true} subdivisions={1}>
+    <standardMaterial diffuseColor={color} specularColor={Color3.Black()} />
+  </icoSphere>
+  )
+}
 
 export default class WithVR extends Component 
 {
@@ -56,9 +72,9 @@ export default class WithVR extends Component
         <div className="row">
           <div className="col-xs-12 col-lg-12 align-top">
             Spin Ghettoblaster: 
-            <Button onClick={this.spinModelClockwise}><Octicon icon={ArrowLeft}/></Button> (or click yellow box)
+            <Button onClick={this.spinModelClockwise}><Octicon icon={ArrowLeft}/></Button> (or click yellow ico sphere)
             &nbsp;&nbsp;
-            <Button onClick={this.spinModelCounterClockwise}><Octicon icon={ArrowRight}/></Button> (or click orange box)
+            <Button onClick={this.spinModelCounterClockwise}><Octicon icon={ArrowRight}/></Button> (or click orange ico sphere)
           </div>
         </div>
         <div className="row">
@@ -73,24 +89,13 @@ export default class WithVR extends Component
                   <shadowGenerator mapSize={1024} useBlurExponentialShadowMap={true} blurKernel={32} shadowCasters={["counterClockwise", "clockwise", "BoomBox"]} />
                 </directionalLight>
 
-                <icoSphere name="counterClockwise" position={new Vector3(-0.5, 1, 0)} radius={0.2} flat={true} subdivisions={1}>
-                  <standardMaterial
-                    diffuseColor={Color3.Yellow()}
-                    specularColor={Color3.Black()}
-                  />
-                  <SingleAxisRotateMeshBehavior rpm={4} axis={Axis.Y} />
-                </icoSphere>
+                <SpinningIcoSphere name='counterClockwise' position={new Vector3(-0.5, 1, 0)} color={Color3.Yellow()} />
                 <ScaledModelWithProgress rootUrl={`${baseUrl}BoomBox/glTF/`} sceneFilename="BoomBox.gltf" scaleTo={0.4}
                   progressBarColor={Color3.FromInts(255, 165, 0)} center={new Vector3(0, 1, 0)}
                   modelRotation={new Vector3(0, this.state.modelRotationY, 0)}
                 />
-                <icoSphere name="clockwise" position={new Vector3(0.5, 1, 0)} radius={0.2} flat={true} subdivisions={1}>
-                  <standardMaterial
-                    diffuseColor={Color3.FromInts(255, 165, 0)}
-                    specularColor={Color3.Black()}
-                  />
-                  <SingleAxisRotateMeshBehavior rpm={4} axis={Axis.Y} />
-                </icoSphere>
+                <SpinningIcoSphere name='clockwise' position={new Vector3(0.5, 1, 0)} color={Color3.FromInts(255, 165, 0)} />
+
                 <vrExperienceHelper webVROptions={{createDeviceOrientationCamera: false}} teleportEnvironmentGround={true} enableInteractions={true} />
                 <environmentHelper options={{enableGroundShadow: true /* true by default */, groundYBias: 1}} mainColor={Color3.FromHexString("#74b9ff")} />
               </Scene>
@@ -106,11 +111,12 @@ export default class WithVR extends Component
       shadowCasters={["counterClockwise", "clockwise", "BoomBox"]}
     />
   </directionalLight>
-  <icoSphere name="counterClockwise" radius={0.2} flat={true} subdivisions={1}>
-    <standardMaterial diffuseColor={Color3.Yellow()} specularColor={Color3.Black()}/>
-  </icoSphere>
-  <Model rootUrl = {'/assets/BoomBox/glTF/'}
-    sceneFilename='BoomBox.gltf' />
+  <SpinningIcoSphere name='counterClockwise' position={new Vector3(-0.5, 1, 0)} color={Color3.Yellow()} />
+  <ScaledModelWithProgress rootUrl={...} sceneFilename="BoomBox.gltf" scaleTo={0.4}
+    ...
+  />
+  <SpinningIcoSphere name='clockwise' position={new Vector3(0.5, 1, 0)} color={Color3.FromInts(255, 165, 0)} />
+
   <vrExperience createDeviceOrientationCamera={false} teleportEnvironmentGround={true} />
   <environmentHelper enableGroundShadow={true} groundYBias={1} mainColor={Color3.FromHexString("#74b9ff")} />
 </Scene>`}
