@@ -1,6 +1,5 @@
 {
-  "name": "create-react-app-babylonjs",
-  "homepage": "https://brianzinn.github.io/create-react-app-babylonjs/",
+  "name": "GCanvasRNExamples",
   "version": "3.0.1",
   "private": true,
   "dependencies": {
@@ -16,6 +15,7 @@
     "react": "16.13.1",
     "react-babylonjs": "3.1.2",
     "react-dom": "16.13.1",
+    "react-native": "0.63.2",
     "react-prism": "^4.3.2",
     "react-reconciler": "^0.25.1",
     "react-redux": "^7.2.0",
@@ -27,7 +27,15 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.5.1",
+    "gh-pages": "^2.2.0",
+    "jest": "^25.1.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-test-renderer": "16.13.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,6 +44,9 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "eslintConfig": {
     "extends": "react-app"
