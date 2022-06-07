@@ -1,3 +1,6 @@
+```
+npm install --legacy-peer-deps
+```
 
 ## Starter Kit
 `react-babylonjs` ([link](https://github.com/brianzinn/react-babylonjs)) aims to be an unopinionated way to integrate React and BabylonJS.  You can choose a declarative or imperative programming style or a combination of both.  This is a sample project to help people get started.  The `react-babylonjs` homepage has more storybook examples, while this project shows how to integrate with other libraries like redux with just a few examples.
