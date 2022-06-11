@@ -1,6 +1,10 @@
 ```
 npm install --legacy-peer-deps
 ```
+## Web
+`npm run web` for development, then view it at [http://localhost:3000](http://localhost:3000) in web browser.
+
+`npm run build-web` to generate files in `build/` for production to deploy to `https://foo.bar.com/` , and can use `npx http-server@13.0.2 build` to simply test it at [http://127.0.0.1:8080](http://127.0.0.1:8080) in web browser.
 
 ## Starter Kit
 `react-babylonjs` ([link](https://github.com/brianzinn/react-babylonjs)) aims to be an unopinionated way to integrate React and BabylonJS.  You can choose a declarative or imperative programming style or a combination of both.  This is a sample project to help people get started.  The `react-babylonjs` homepage has more storybook examples, while this project shows how to integrate with other libraries like redux with just a few examples.
