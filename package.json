@@ -61,9 +61,6 @@
   "jest": {
     "preset": "react-native"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
