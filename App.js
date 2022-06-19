@@ -1,32 +1,24 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * GCanvas React Native Examples
+ * https://github.com/flyskywhy/react-native-gcanvas
  *
  * @format
  * @flow strict-local
  */
 
 import React from 'react';
-import {Button, StyleSheet, View, Text, StatusBar} from 'react-native';
+import {Button, StyleSheet, View, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import DragNDropScreen from './src/dragNdrop';
 
 function HomeScreen({navigation}) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
       <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
+        title="babylonjs Drag and drop"
+        onPress={() => navigation.navigate('DragNDrop')}
       />
-    </View>
-  );
-}
-
-function DetailsScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
     </View>
   );
 }
@@ -41,9 +33,13 @@ const App: () => React$Node = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Overview'}}
+          options={{title: 'GCanvas React Native Examples'}}
         />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen
+          name="DragNDrop"
+          component={DragNDropScreen}
+          options={{title: 'Drag and drop'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
