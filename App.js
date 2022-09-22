@@ -10,11 +10,16 @@ import React from 'react';
 import {Button, StyleSheet, View, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Canvas2dDemoScreen from './app/components/Canvas2dDemo';
 import DragNDropScreen from './src/dragNdrop';
 
 function HomeScreen({navigation}) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Button
+        title="Canvas 2d Demo"
+        onPress={() => navigation.navigate('Canvas2dDemo')}
+      />
       <Button
         title="babylonjs Drag and drop"
         onPress={() => navigation.navigate('DragNDrop')}
@@ -34,6 +39,11 @@ const App: () => React$Node = () => {
           name="Home"
           component={HomeScreen}
           options={{title: 'GCanvas React Native Examples'}}
+        />
+        <Stack.Screen
+          name="Canvas2dDemo"
+          component={Canvas2dDemoScreen}
+          options={{title: 'Canvas 2d Demo'}}
         />
         <Stack.Screen
           name="DragNDrop"

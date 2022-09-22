@@ -48,7 +48,8 @@
     "react-router-dom": "^5.1.2",
     "react-switch": "^5.0.1",
     "reactstrap": "^8.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "resource-loader": "^4.0.0-rc4"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "3.0.1",
