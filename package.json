@@ -32,6 +32,7 @@
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.5.0",
     "connected-react-router": "^6.8.0",
+    "m4.js": "^1.0.0",
     "modal-enhanced-react-native-web": "^0.2.0",
     "react": "16.13.1",
     "react-babylonjs": "3.1.2",
@@ -49,7 +50,8 @@
     "react-switch": "^5.0.1",
     "reactstrap": "^8.4.1",
     "redux": "^4.0.5",
-    "resource-loader": "^4.0.0-rc4"
+    "resource-loader": "^4.0.0-rc4",
+    "webgl-utils.js": "^1.1.0"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "3.0.1",
