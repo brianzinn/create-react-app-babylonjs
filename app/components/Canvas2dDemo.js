@@ -1,3 +1,5 @@
+// ref to "2D canvas" in @flyskywhy/react-native-gcanvas/README.md
+
 import React, {Component} from 'react';
 import {
   Platform,
@@ -195,7 +197,7 @@ export default class Canvas2dDemo extends Component {
             onIsReady={(value) => (this.isGReactTextureViewReady = value)}
             isGestureResponsible={true /* Here is just for example, you can remove this line because default is true */}
             isAutoClearRectBeforePutImageData={false /* default is false, if you want to be exactly compatible with Web, you can set it to true*/}
-            devicePixelRatio={undefined /* Here is just for example, you can remove this line because default is undefined and means default is PixelRatio.get(), ref to "About devicePixelRatio" below */}
+            devicePixelRatio={undefined /* Here is just for example, you can remove this line because default is undefined and means default is PixelRatio.get(), ref to "About devicePixelRatio" in @flyskywhy/react-native-gcanvas/README.md */}
             style={styles.gcanvas}
           />
         )}
