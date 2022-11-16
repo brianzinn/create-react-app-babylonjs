@@ -21,6 +21,17 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
+
+        // to fix `Read timed out` e.g.
+        // > Could not resolve all artifacts for configuration ':react-native-fs:classpath'.
+        //    > Could not download bcprov-jdk15on-1.48.jar (org.bouncycastle:bcprov-jdk15on:1.48)
+        //       > Could not get resource 'https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk15on/1.48/bcprov-jdk15on-1.48.jar'.
+        //          > Read timed out
+        //    > Could not download guava-17.0.jar (com.google.guava:guava:17.0)
+        //       > Could not get resource 'https://repo.maven.apache.org/maven2/com/google/guava/guava/17.0/guava-17.0.jar'.
+        //          > Read timed out
+        maven { url 'https://maven.aliyun.com/repository/google' }
+
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url("$rootDir/../node_modules/react-native/android")
