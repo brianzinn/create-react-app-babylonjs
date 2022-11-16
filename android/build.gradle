@@ -3,7 +3,13 @@
 buildscript {
     ext {
         buildToolsVersion = "29.0.2"
-        minSdkVersion = 16
+
+        // D8: Cannot fit requested classes in a single dex file (# methods: 71398 > 65536)
+        // com.android.builder.dexing.DexArchiveMergerException: Error while merging dex archives:
+        // The number of method references in a .dex file cannot exceed 64K.
+        // Learn how to resolve this issue at https://developer.android.com/tools/building/multidex.html
+        minSdkVersion = 24
+
         compileSdkVersion = 29
         targetSdkVersion = 29
     }
