@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {GCanvasView} from '@flyskywhy/react-native-gcanvas';
+import * as webglUtils from 'webgl-utils.js';
+import m4 from 'm4.js';
 
-// var gl;
+var isLooping = false;
+
+var gl;
 
 // ref to https://webglfundamentals.org/webgl/lessons/zh_cn/webgl-cube-maps.html
 
@@ -42,14 +46,14 @@ void main() {
 function main() {
   // Get A WebGL context
   /** @type {HTMLCanvasElement} */
-  var canvas = document.querySelector("#canvas");
-  var gl = canvas.getContext("webgl");
-  if (!gl) {
-    return;
-  }
+  // var canvas = document.querySelector("#canvas");
+  // var gl = canvas.getContext("webgl");
+  // if (!gl) {
+  //   return;
+  // }
 
   // setup GLSL program
-  var program = webglUtils.createProgramFromScripts(gl, ["vertex-shader-3d", "fragment-shader-3d"]);
+  var program = webglUtils.createProgramFromSources(gl, [vertexShaderSource, fragmentShaderSource]);
 
   // look up where the vertex data needs to go.
   var positionLocation = gl.getAttribLocation(program, "a_position");
@@ -186,6 +190,10 @@ function main() {
     // Draw the geometry.
     gl.drawArrays(gl.TRIANGLES, 0, 6 * 6);
 
+    if (!isLooping) {
+      return;
+    }
+
     requestAnimationFrame(drawScene);
   }
 }
@@ -256,7 +264,7 @@ export default class WebglCubeMaps extends Component {
     super(props);
     this.canvas = null;
     this.state = {
-      debugInfo: 'Click me to draw some on canvas',
+      debugInfo: 'Click me to start or stop drawing',
     };
 
     // only useful on Android, because it's always true on iOS
@@ -277,6 +285,10 @@ export default class WebglCubeMaps extends Component {
     }
   }
 
+  componentWillUnmount() {
+    isLooping = false;
+  }
+
   initCanvas = (canvas) => {
     if (this.canvas) {
       return;
@@ -291,7 +303,7 @@ export default class WebglCubeMaps extends Component {
       this.canvas.height = this.canvas.clientHeight;
     }
 
-    // gl = this.canvas.getContext('webgl');
+    gl = this.canvas.getContext('webgl');
   };
 
   onCanvasResize = ({width, height, canvas}) => {
@@ -301,6 +313,13 @@ export default class WebglCubeMaps extends Component {
   };
 
   drawSome = async () => {
+    if (isLooping) {
+      isLooping = false;
+      return;
+    }
+
+    isLooping = true;
+
     // On Android, sometimes this.isGReactTextureViewReady is false e.g.
     // navigate from a canvas page into a drawer item page with
     // react-navigation on Android, the canvas page will be maintain
@@ -308,9 +327,9 @@ export default class WebglCubeMaps extends Component {
     // this drawSome() in some loop, it's wasting CPU and GPU,
     // if you don't care about such wasting, you can delete
     // this.isGReactTextureViewReady and related onIsReady.
-    // if (gl && this.isGReactTextureViewReady) {
-    //   main();
-    // }
+    if (gl && this.isGReactTextureViewReady) {
+      main();
+    }
   };
 
   takePicture = () => {
