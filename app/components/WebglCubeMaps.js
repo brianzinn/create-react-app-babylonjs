@@ -265,6 +265,7 @@ export default class WebglCubeMaps extends Component {
     this.canvas = null;
     this.state = {
       debugInfo: 'Click me to start or stop drawing',
+      hasOc1: false,
     };
 
     // only useful on Android, because it's always true on iOS
@@ -342,6 +343,24 @@ export default class WebglCubeMaps extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {Platform.OS !== 'web' && (
+          <GCanvasView
+            style={{
+              width: 1000, // 1000 should enough for offscreen canvas usage
+              height: 1000,
+              position: 'absolute',
+              left: 1000, // 1000 should enough to not display on screen means offscreen canvas :P
+              top: 0,
+              zIndex: -100, // -100 should enough to not bother onscreen canvas
+            }}
+            onCanvasCreate={(canvas) => {
+              global.createCanvasElements.push(canvas);
+              this.setState({hasOc1: true});
+            }}
+            devicePixelRatio={1} // should not 1 < devicePixelRatio < 2 as float to avoid pixel offset flaw when GetImageData with PixelsSampler in @flyskywhy/react-native-gcanvas/core/src/support/GLUtil.cpp
+            isGestureResponsible={false}
+          />
+        )}
         <TouchableOpacity onPress={this.drawSome}>
           <Text style={styles.welcome}>{this.state.debugInfo}</Text>
         </TouchableOpacity>
@@ -356,7 +375,7 @@ export default class WebglCubeMaps extends Component {
               } /* canvas with react-native-web can't use width and height in styles.gcanvas */
             }
           />
-        ) : (
+        ) : (this.state.hasOc1 && (
           <GCanvasView
             onCanvasResize={this.onCanvasResize}
             onCanvasCreate={this.initCanvas}
@@ -372,7 +391,7 @@ export default class WebglCubeMaps extends Component {
             }
             style={styles.gcanvas}
           />
-        )}
+        ))}
         <TouchableOpacity onPress={this.takePicture}>
           <Text style={styles.welcome}>Click me toDataURL()</Text>
         </TouchableOpacity>
