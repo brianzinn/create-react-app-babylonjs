@@ -14,6 +14,7 @@ import Canvas2dDemoScreen from './app/components/Canvas2dDemo';
 import Webgl3dTexturesScreen from './app/components/Webgl3dTextures';
 import WebglCubeMapsScreen from './app/components/WebglCubeMaps';
 import DragNDropScreen from './src/dragNdrop';
+import NonDeclarativeScreen from './src/nonDeclarative';
 
 function HomeScreen({navigation}) {
   return (
@@ -33,6 +34,10 @@ function HomeScreen({navigation}) {
       <Button
         title="babylonjs Drag and drop"
         onPress={() => navigation.navigate('DragNDrop')}
+      />
+      <Button
+        title="babylonjs Non-Declarative"
+        onPress={() => navigation.navigate('NonDeclarative')}
       />
     </View>
   );
@@ -69,6 +74,11 @@ const App: () => React$Node = () => {
           name="DragNDrop"
           component={DragNDropScreen}
           options={{title: 'Drag and drop'}}
+        />
+        <Stack.Screen
+          name="NonDeclarative"
+          component={NonDeclarativeScreen}
+          options={{title: 'Non-Declarative'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

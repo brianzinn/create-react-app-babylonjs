@@ -14,4 +14,8 @@ module.exports = {
       },
     }),
   },
+  resolver: {
+    assetExts: ['dds', 'txt', 'jpg', 'png'],
+    sourceExts: ['js', 'json', 'ts', 'tsx', 'jsx'],
+  },
 };

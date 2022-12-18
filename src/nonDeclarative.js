@@ -1,14 +1,26 @@
 import React from 'react'
-import { Engine, Scene } from 'react-babylonjs'
+import {
+  Linking,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import '@flyskywhy/react-native-browser-polyfill';
+import {Asset} from 'expo-asset';
+if (Platform.OS !== 'web') {
+  var RNFS = require('react-native-fs');
+}
+import {Engine, Scene} from 'react-native-babylonjs';
 import { Color3, FreeCamera, Vector3, ArcRotateCamera, DefaultRenderingPipeline, HemisphericLight, DepthOfFieldEffectBlurLevel, PBRMetallicRoughnessMaterial, CubeTexture, Mesh } from '@babylonjs/core';
 import { Control, TextBlock, Slider, StackPanel, AdvancedDynamicTexture } from '@babylonjs/gui'
-import { PrismCode } from 'react-prism';
 
 function meshPicked(mesh) {
   console.log('mesh picked:', mesh)
 }
 
-function onSceneMount(e) {
+async function onSceneMount(e) {
   const { canvas, scene } = e
 
   scene.clearColor = new Color3(0.5,0.5,0.5)
@@ -20,7 +32,88 @@ function onSceneMount(e) {
   var light = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
   light.intensity = 0.7;
   var pbr = new PBRMetallicRoughnessMaterial("pbr", scene);
-  pbr.environmentTexture = CubeTexture.CreateFromPrefilteredData("textures/environment.dds", scene);
+
+  // let url = 'https://raw.githubusercontent.com/brianzinn/react-babylonjs/v3.1.3/packages/storybook/storyboard-site/assets/textures/environment.dds';
+  let url = 'textures/environment.dds';
+  let forcedExtension = '.dds';
+
+  if (Platform.OS !== 'web') {
+    const environmentId = require('../public/textures/environment.dds');
+    const environmentAsset = Asset.fromModule(environmentId);
+
+    if (environmentAsset.uri.match('^http')) {
+      // In react-native debug/dev mode the asset will be served over http://localhost:8081
+      // console.warn(environmentAsset);
+      // {
+      //   downloaded: false,
+      //   downloading: false,
+      //   hash: 'e57fc2e467eb5595c3c1a0ebf7b2770b',
+      //   height: null,
+      //   localUri: null,
+      //   name: 'environment',
+      //   type: dds,
+      //   uri: 'http://localhost:8081/assets/public/textures/environment.dds?platform=android&hash=e57fc2e467eb5595c3c1a0ebf7b2770b',
+      //   width: null
+      // }
+      // In react-native-web debug mode the asset will be served over http://localhost:3000
+      // so you can also use require('../public/textures/environment.dds') instead of
+      // `let url = 'textures/environment.dds';` above, if you wish
+      // {
+      //   downloaded: false,
+      //   downloading: false,
+      //   hash: null,
+      //   height: null,
+      //   localUri: null,
+      //   name: 'environment.6140ab69a9155fbef5c1.dds',
+      //   type: 'dds',
+      //   uri: '/static/media/environment.6140ab69a9155fbef5c1.dds',
+      //   width: null,
+      // }
+
+      // because ThinEngine.prototype._createTextureBase() in @babylonjs/core/Engines/thinEngine.js
+      // will "Remove query string", so we just use the uri
+      // url = environmentAsset.uri;
+      // to fix "Cannot load cubemap because files were not defined" of createCubeTextureBase()
+      // in @babylonjs/core/Engines/Extensions/engine.cubeTexture.js
+
+      url = environmentAsset.uri.replace(/\?.*/, '');
+    } else {
+      // In release mode the asset will be on the file system.
+      let environmentBase64;
+      if (Platform.OS === 'android') {
+        // On android we get a resource id instead of a regular path. We need
+        // to load the weights from the res/raw folder using this id.
+        try {
+          environmentBase64 = await RNFS.readFileRes(`${environmentAsset.uri}.${environmentAsset.type}`, 'base64');
+        } catch (err) {
+          throw new Error(`Error reading resource ${environmentAsset.uri}. Make sure the file is
+        in located in the res/raw folder of the bundle`);
+        }
+      } else {
+        try {
+          environmentBase64 = await RNFS.readFile(environmentAsset.uri, 'base64');
+        } catch (err) {
+          throw new Error(`Error reading resource ${environmentAsset.uri}. Make sure the file is
+        in located in the res/raw(where on iOS?) folder of the bundle`);
+        }
+      }
+
+      let dataUrl = 'data:';
+      const type = 'image/vnd.ms-dds'; // require('react-native-mime-types').lookup('environment.dds')
+      if (type) {
+        dataUrl += type + ';';
+      }
+      dataUrl += 'base64,';
+      dataUrl += environmentBase64;
+
+      url = dataUrl;
+    }
+  }
+  pbr.environmentTexture = CubeTexture.CreateFromPrefilteredData(
+    url,
+    scene,
+    forcedExtension, // dataUrl need it
+  );
   var gridSize = 4;
   for(var i=0;i<gridSize;i++){
       for(var j=0;j<10;j++){
@@ -52,7 +145,12 @@ function onSceneMount(e) {
   // Create default pipeline and enable dof with Medium blur level
   var pipeline = new DefaultRenderingPipeline("default", true, scene, [scene.activeCamera]);
   pipeline.depthOfFieldBlurLevel = DepthOfFieldEffectBlurLevel.Medium;
-  pipeline.depthOfFieldEnabled = true;
+
+  // TODO: Not support [Post Processes] on native yet as described in README.md
+  if (Platform.OS === 'web') {
+    pipeline.depthOfFieldEnabled = true;
+  }
+
   pipeline.depthOfField.focalLength = 180;
   pipeline.depthOfField.fStop = 3;
   pipeline.depthOfField.focusDistance = 2250;
@@ -116,51 +214,77 @@ function onSceneMount(e) {
 }
 
 function NonDeclarative() {
-return (
-  <div>
-    <div className="row">
-      <div className="col-xs-12 col-lg-12 align-top">
-        You can mix declarative with non-declarative.  This example just copies the "Depth of Field" sample playground from the <a href="https://doc.babylonjs.com/how_to/using_default_rendering_pipeline" target="_new">default rendering pipeline documentation</a>.
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-xs-12 col-md-6">
-        <Engine antialias={true} adaptToDeviceRatio={true} canvasId="sample-canvas">
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        accessibilityRole={'button'}
+        onPress={() =>
+          Linking.openURL(
+            'https://brianzinn.github.io/create-react-app-babylonjs/nonDeclarative',
+          )
+        }
+        style={styles.linkContainer}>
+        <Text style={styles.link}>Click me to contrast the Web version</Text>
+      </TouchableOpacity>
+      {Platform.OS !== 'web' && (
+        <Text style={styles.description}>Please wait 10 seconds</Text>
+      )}
+      <View style={styles.canvasContainer}>
+        <Engine
+          // engineOptions={{
+          //   disableWebGL2Support: true,
+          //   needPOTTextures: true,
+          //   limitDeviceRatio: 1,
+          // }}
+          antialias={true}
+          adaptToDeviceRatio={true}
+          canvasId="sample-canvas">
           <Scene onMeshPicked={meshPicked} onSceneMount={onSceneMount} />
         </Engine>
-      </div>
-      <div className="col-xs-12 col-md-6">
-        <pre>
-            <PrismCode className="language-jsx">
-{`// If you import Scene from '@babylonjs/core' then make sure to alias one of them.
-import React, { Component } from 'react'
-import { Scene } from 'react-babylonjs'
-import { Vector3, ArcRotateCamera, ... } from '@babylonjs/core';
-
-function onSceneMount(e) {
-  const { canvas, scene } = e
-
-  // Your code here (ie: playground code could go here)...  
-  scene.getEngine().runRenderLoop(() => {
-      if (scene) {
-          scene.render();
-      }
-  });
-}
-
-function NonDeclarative() {
-  return (
-    <Engine canvasId="sample-canvas">
-      <Scene onSceneMount={onSceneMount} />
-    </Engine>
+      </View>
+    </View>
   );
-}`}
-              </PrismCode>
-            </pre>
-        </div>
-      </div>
-    </div>
-  )
 }
 
-export default NonDeclarative
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#F5FCFF',
+    // backgroundColor: '#00ffbbff',
+    // opacity: 0.5,
+    // zIndex: -1,
+  },
+  canvasContainer: {
+    width: 256,
+    height: 256,
+    // width: '100%',
+    // height: '100%',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor: 'yellow',
+    // opacity: 0.5,
+  },
+  linkContainer: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  link: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '400',
+    color: 'blue',
+  },
+  description: {
+    textAlign: 'center',
+    paddingVertical: 16,
+    fontWeight: '400',
+    fontSize: 18,
+  },
+});
+
+export default NonDeclarative;
