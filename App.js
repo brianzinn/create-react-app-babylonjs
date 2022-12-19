@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import {Button, StyleSheet, View, StatusBar} from 'react-native';
+import {Button, Platform, StyleSheet, View, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Canvas2dDemoScreen from './app/components/Canvas2dDemo';
@@ -15,6 +15,12 @@ import Webgl3dTexturesScreen from './app/components/Webgl3dTextures';
 import WebglCubeMapsScreen from './app/components/WebglCubeMaps';
 import DragNDropScreen from './src/dragNdrop';
 import NonDeclarativeScreen from './src/nonDeclarative';
+
+if (Platform.OS !== 'web') {
+  require('react-native').LogBox.ignoreLogs([
+    'React Components must start with an uppercase letter',
+  ]);
+}
 
 function HomeScreen({navigation}) {
   return (
