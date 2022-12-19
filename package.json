@@ -74,6 +74,9 @@
   "jest": {
     "preset": "react-native"
   },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
