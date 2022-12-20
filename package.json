@@ -12,6 +12,7 @@
     "bundle-android": "cross-env ./android/gradlew bundleRelease --offline -x lint -x lintVitalRelease -p ./android/",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "web": "cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
+    "web-clean": "rimraf node_modules/.cache/default-development",
     "web-fresh": "rm -fr node_modules/.cache/*; cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired start",
     "build-web": "cross-env PLATFORM_OS=web DISABLE_ESLINT_PLUGIN=true react-app-rewired build",
     "start": "react-scripts start",
